@@ -40,7 +40,7 @@ class WeatherDataHelper {
 
     var descriptions = WeatherDescription.values;
     var description =
-        descriptions.elementAt(_random.nextInt(descriptions.length - 1));
+        descriptions.elementAt(_random.nextInt(descriptions.length));
     if (hour < 6 || hour > 18) {
       if (description == WeatherDescription.sunny) {
         description = WeatherDescription.clear;

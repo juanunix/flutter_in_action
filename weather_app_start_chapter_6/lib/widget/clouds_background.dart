@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:weather_app_start_chapter_6/styles.dart';
 
 // TODO: Make Animated
-// TODO: Draw clouds with CustomPainter
 class Clouds extends StatelessWidget {
   final bool isRaining;
 
@@ -10,11 +9,9 @@ class Clouds extends StatelessWidget {
 
   Widget build(BuildContext context) {
     var screenSize = MediaQuery.of(context).size;
-    var cloudPaint = new Paint()..color = AppColor.cloudColorLight;
-    var rainDropStrokeWidth = 3.0;
-    var rainPaint = Paint()
+    var _paintBrush = Paint()
       ..color = AppColor.cloudColorLight
-      ..strokeWidth = rainDropStrokeWidth
+      ..strokeWidth = 3.0
       ..strokeCap = StrokeCap.round;
 
     return Container(
@@ -22,9 +19,8 @@ class Clouds extends StatelessWidget {
       child: CustomPaint(
         size: screenSize,
         painter: CloudPainter(
-          cloudPaint: cloudPaint,
-          rainPaint: rainPaint,
           isRaining: isRaining,
+          cloudPaint: _paintBrush,
         ),
         isComplex: true,
         willChange: true,
@@ -34,15 +30,12 @@ class Clouds extends StatelessWidget {
 }
 
 class CloudPainter extends CustomPainter {
-  final Paint cloudPaint;
-  final Paint rainPaint;
   final bool isRaining;
-
-  CloudPainter({this.cloudPaint, this.rainPaint, this.isRaining});
+  final Paint cloudPaint;
+  CloudPainter({this.isRaining, this.cloudPaint});
 
   @override
   void paint(Canvas canvas, Size size) {
-    // Rectangle Base height = 40.0
     var rectTop = 110.0;
     var rectBottom = rectTop + 40.0;
 
@@ -83,7 +76,7 @@ class CloudPainter extends CustomPainter {
             new Offset(rainDropOffsetXStart, rainDropOffsetYStart),
             new Offset(
                 rainDropOffsetXEnd, rainDropOffsetYStart + rainDropLength),
-            rainPaint);
+            cloudPaint);
       }
     }
   }

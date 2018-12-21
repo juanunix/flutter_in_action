@@ -75,24 +75,21 @@ class _ForecastPageState extends State<ForecastPage>
     _tabController.addListener(handleTabChange);
 
     // TODO: handle animation updates
-//    currentAnimationState =
-//        _bloc.getDataForNextAnimationState(_tabController.index);
-//    _handleStateChange();
+    currentAnimationState =
+        _bloc.getDataForNextAnimationState(_tabController.index);
+    _handleStateChange();
   }
 
   @override
   void dispose() {
     _tabController?.dispose();
     // TODO: dispose AnimationControllers
-//    _animationController?.dispose();
     super.dispose();
   }
 
   void handleTabChange() {
     if (_tabController.indexIsChanging) return;
-    setState(() {
-      activeTabIndex = _tabController.index;
-    });
+    _handleStateChange();
   }
 
   /// New methods in Chapter 6
@@ -102,13 +99,23 @@ class _ForecastPageState extends State<ForecastPage>
   /// This method should build animation controllers and tweens,
   /// and get relevant data
   void _handleStateChange() {
-    // TODO: Implement _handleStateChange()
+    nextAnimationState =
+        _bloc.getDataForNextAnimationState(_tabController.index);
+    _buildAnimationControllers();
+    _buildTweens();
+    setState(() {
+      activeTabIndex = _tabController.index;
+    });
+    _initAnimation();
+    // for next time the animation fires
+    currentAnimationState = nextAnimationState;
   }
 
   /// This method is called whenever the state changes
   /// On every state change in this app, the animation needs to be kicked off again
   void _initAnimation() {
-    // TODO: Implement _initAnimation()
+    // TODO: initialize _animationController with [forward()]
+    // TODO: initialize _weatherConditionAnimationController with [forward()]
   }
 
   /// [AnimationController]s are rebuilt often in this app,
@@ -116,7 +123,8 @@ class _ForecastPageState extends State<ForecastPage>
   /// Be sure to dispose of old controllers!
   ///
   void _buildAnimationControllers() {
-    // TODO: Implement _buildAnimationControllers()
+    // TODO: handle _animationController
+    // TODO: handle _weatherConditionAnimationController
   }
 
   /// Because _each_ iteration of an animation has start

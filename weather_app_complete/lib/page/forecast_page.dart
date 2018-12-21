@@ -86,7 +86,7 @@ class _ForecastPageState extends State<ForecastPage>
     setState(() {
       activeTabIndex = _tabController.index;
     });
-    _initAnimation(); // TODO: Why was this in setState?
+    _initAnimation();
     // for next time the animation fires
     currentAnimationState = nextAnimationState;
   }
@@ -234,15 +234,18 @@ class _ForecastPageState extends State<ForecastPage>
           child: Stack(
             children: <Widget>[
               SlideTransition(
-                key: Key("sun"),
-                position: _positionOffsetTween.animate(_animationController),
+                position: _positionOffsetTween.animate(
+                  _animationController.drive(
+                    CurveTween(curve: Curves.bounceOut),
+                  ),
+                ),
                 child: background,
               ),
               SlideTransition(
-                position: _cloudPositionOffsetTween
-                    .animate(_weatherConditionAnimationController),
+                position: _cloudPositionOffsetTween.animate(
+                    _weatherConditionAnimationController
+                        .drive(CurveTween(curve: Curves.bounceOut))),
                 child: Clouds(
-                  key: Key("clouds"),
                   isRaining: isRaining,
                   animation: _cloudColorTween.animate(_animationController),
                 ),

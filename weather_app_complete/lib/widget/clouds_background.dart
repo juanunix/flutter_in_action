@@ -10,11 +10,9 @@ class Clouds extends AnimatedWidget {
     final Animation<Color> animation = listenable;
 
     var screenSize = MediaQuery.of(context).size;
-    var cloudPaint = new Paint()..color = animation.value;
-    var rainDropStrokeWidth = 3.0;
-    var rainPaint = Paint()
+    var _paintBrush = Paint()
       ..color = animation.value
-      ..strokeWidth = rainDropStrokeWidth
+      ..strokeWidth = 3.0
       ..strokeCap = StrokeCap.round;
 
     return Container(
@@ -22,12 +20,9 @@ class Clouds extends AnimatedWidget {
       child: CustomPaint(
         size: screenSize,
         painter: CloudPainter(
-          cloudPaint: cloudPaint,
-          rainPaint: rainPaint,
+          cloudPaint: _paintBrush,
           isRaining: isRaining,
         ),
-        isComplex: true,
-        willChange: true,
       ),
     );
   }
@@ -35,14 +30,12 @@ class Clouds extends AnimatedWidget {
 
 class CloudPainter extends CustomPainter {
   final Paint cloudPaint;
-  final Paint rainPaint;
   final bool isRaining;
 
-  CloudPainter({this.cloudPaint, this.rainPaint, this.isRaining});
+  CloudPainter({this.cloudPaint, this.isRaining});
 
   @override
   void paint(Canvas canvas, Size size) {
-    // Rectangle Base height = 40.0
     var rectTop = 110.0;
     var rectBottom = rectTop + 40.0;
 
@@ -62,6 +55,8 @@ class CloudPainter extends CustomPainter {
     canvas.drawCircle(Offset(figureLeftEdge + 5, 100.0), 50.0, cloudPaint);
     canvas.drawCircle(Offset(figureCenter, 70.0), 60.0, cloudPaint);
     canvas.drawCircle(Offset(figureRightEdge, 70.0), 80.0, cloudPaint);
+
+    cloudPaint.strokeWidth = 3.0;
     canvas.drawRRect(cloudBase, cloudPaint);
 
     if (isRaining) {
@@ -83,7 +78,7 @@ class CloudPainter extends CustomPainter {
             new Offset(rainDropOffsetXStart, rainDropOffsetYStart),
             new Offset(
                 rainDropOffsetXEnd, rainDropOffsetYStart + rainDropLength),
-            rainPaint);
+            cloudPaint);
       }
     }
   }
