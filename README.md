@@ -17,4 +17,5 @@ This repo houses the projects needed to follow along with the (forthcoming) Flut
 - `counter_app` - A slightly beefier version of the Flutter counter app created by `flutter create`
 - `weather_app_start_chapter_5` - Starting for chapter 5. Incomplete project. A Flutter app that shows the forecast. Focused on UI, Layout and Animation
 - `weather_app_start_chapter_6` - Starting for chapter 6, where chapter 5 left off. Incomplete project. A Flutter app that shows the forecast. Focused on UI, Layout and Animation
-- `weather_app` - Completed weather app project.
+- `weather_app_complete` - Completed weather app project.
+- `e_commerce_complete` - Completed shopping cart app for section three.

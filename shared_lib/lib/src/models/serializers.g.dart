@@ -22,6 +22,7 @@ part of 'serializers.dart';
 Serializers _$serializers = (new Serializers().toBuilder()
       ..add(Forecast.serializer)
       ..add(ForecastDay.serializer)
+      ..add(Product.serializer)
       ..add(Temperature.serializer)
       ..add(TemperatureUnit.serializer)
       ..add(Weather.serializer)
