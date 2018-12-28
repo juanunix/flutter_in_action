@@ -23,6 +23,7 @@ class ECommerceApp extends StatefulWidget {
 class _ECommerceAppState extends State<ECommerceApp> {
   @override
   Widget build(BuildContext context) {
+    /// All constants can be found in [utils/styles.dart]
     var _theme = ThemeData(
       backgroundColor: AppColors.background,
       scaffoldBackgroundColor: AppColors.background,
@@ -42,7 +43,7 @@ class _ECommerceAppState extends State<ECommerceApp> {
             displayColor: AppColors.accentTextColor,
           ),
       primaryColor: AppColors.primary,
-      accentColor: AppColors.primary,
+      accentColor: AppColors.accent,
       primaryIconTheme: Theme.of(context)
           .iconTheme
           .copyWith(color: AppColors.displayTextColor),

@@ -31,7 +31,7 @@ class AppMenu extends StatelessWidget {
     return isActive
         ? Container(
             decoration: BoxDecoration(
-                color: AppColors.primary[500].withOpacity(.3),
+                color: AppColors.accent,
                 borderRadius: BorderRadius.circular(10.0)),
             child: tile,
             margin: EdgeInsets.all(Spacing.matGridUnit()),

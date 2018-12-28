@@ -16,6 +16,7 @@ class AppColors {
   /// Off white
   static const background = Color(0xFFF5F5F5);
   static const cardBackground = Colors.white;
+  static const activeFillColor = Color(0xFFE0E0E0);
 
   /// Text Theme
   /// For cards, content, and canvas:
@@ -29,6 +30,7 @@ class AppColors {
   static const accentTextColor = Colors.white70;
 
   static MaterialColor primary = new MaterialColor(0xFFC18083, _primarySwatch);
+  static MaterialColor accent = new MaterialColor(0xFFFEEAE6, _accentSwatch);
 }
 
 Map<int, Color> _primarySwatch = {
@@ -42,4 +44,17 @@ Map<int, Color> _primarySwatch = {
   700: Color(0xFF84565E),
   800: Color(0xFF664046),
   900: Color(0xFF442B2D),
+};
+
+Map<int, Color> _accentSwatch = {
+  50: Color(0xFFFEEAE6),
+  100: Color(0xFFFFCEB9),
+  200: Color(0xFFFEAE8B),
+  300: Color(0xFFFC8F5C),
+  400: Color(0xFFFA7736),
+  500: Color(0xFFF86203),
+  600: Color(0xFFEE5C00),
+  700: Color(0xFFE05400),
+  800: Color(0xFFD24D00),
+  900: Color(0xFFBA4000),
 };
