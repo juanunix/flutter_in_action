@@ -1,11 +1,19 @@
-import 'package:e_commerce_complete/page/cart_page.dart';
-import 'package:e_commerce_complete/page/page_conatiner.dart';
-import 'package:e_commerce_complete/page/user_settings_page.dart';
+import 'package:e_commerce_complete/blocs/app_bloc.dart';
+import 'package:e_commerce_complete/page/base/page_base.dart';
+import 'package:e_commerce_complete/page/base/page_container.dart';
 import 'package:e_commerce_complete/utils/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_lib/e_commerce_app.dart';
 
-void main() => runApp(ECommerceApp());
+void main() {
+  /// Wrap the app in the AppMenuController
+  /// An inherited widget which keeps track of
+  /// the state of the app, including the
+  /// active page
+  runApp(AppMenuController(
+    child: ECommerceApp(),
+  ));
+}
 
 class ECommerceApp extends StatefulWidget {
   @override
@@ -16,24 +24,39 @@ class _ECommerceAppState extends State<ECommerceApp> {
   @override
   Widget build(BuildContext context) {
     var _theme = ThemeData(
+      backgroundColor: AppColors.background,
+      scaffoldBackgroundColor: AppColors.background,
+      // content
       textTheme: Theme.of(context).textTheme.apply(
-            bodyColor: AppStyle.primaryTextColor,
-            displayColor: AppStyle.displayTextColor,
+            bodyColor: AppColors.textColor,
+            displayColor: AppColors.textColor,
           ),
-      backgroundColor: AppStyle.background,
+      // headings -- contrasts 'primary color'
+      primaryTextTheme: Theme.of(context).textTheme.apply(
+            bodyColor: AppColors.displayTextColor,
+            displayColor: AppColors.displayTextColor,
+          ),
+      // ui -- contrasts 'accent color'
       accentTextTheme: Theme.of(context).textTheme.apply(
-            bodyColor: AppStyle.textColorLight,
-            displayColor: AppStyle.textColorLight,
+            bodyColor: AppColors.accentTextColor,
+            displayColor: AppColors.accentTextColor,
           ),
+      primaryColor: AppColors.uiColor,
+      accentColor: AppColors.uiColor,
+      primaryIconTheme: Theme.of(context)
+          .iconTheme
+          .copyWith(color: AppColors.displayTextColor),
     );
 
     return MaterialApp(
       theme: _theme,
       routes: {
         ECommerceRoutes.catalogPage: (context) =>
-            PageContainer(pageType: PageType.catalog),
-        ECommerceRoutes.cartItemDetailPage: (context) =>
-            PageContainer(pageType: PageType.cart),
+            PageContainer(pageType: PageType.Catalog),
+        ECommerceRoutes.cartPage: (context) =>
+            PageContainer(pageType: PageType.Cart),
+        ECommerceRoutes.userSettingsPage: (context) =>
+            PageContainer(pageType: PageType.Settings),
       },
     );
   }

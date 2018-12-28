@@ -32,7 +32,7 @@ class ProductDetailCard extends StatelessWidget {
             ),
             child: Container(
               constraints: BoxConstraints.expand(
-                height: AppStyle.matGridUnit(scale: 5),
+                height: Spacing.matGridUnit(scale: 5),
               ),
               decoration: BoxDecoration(
                 color: Colors.white,
@@ -41,15 +41,12 @@ class ProductDetailCard extends StatelessWidget {
                   bottomLeft: Radius.circular(10.0),
                 ),
               ),
-              padding: EdgeInsets.all(AppStyle.matGridUnit(scale: .5)),
+              padding: EdgeInsets.all(
+                Spacing.matGridUnit(scale: .5),
+              ),
               child: Center(
-                child: Text(
-                  product.title,
-                  style: Theme.of(context)
-                      .accentTextTheme
-                      .subhead
-                      .copyWith(color: AppStyle.primaryTextColor),
-                ),
+                child: Text(product.title,
+                    style: Theme.of(context).primaryTextTheme.subhead),
               ),
             ),
           ),

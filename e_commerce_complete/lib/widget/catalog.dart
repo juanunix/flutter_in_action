@@ -1,5 +1,4 @@
-import 'package:e_commerce_complete/page/page_conatiner.dart';
-import 'package:e_commerce_complete/page/product_detail_page.dart';
+import 'package:e_commerce_complete/page/base/page_container.dart';
 import 'package:e_commerce_complete/utils/styles.dart';
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
@@ -24,7 +23,6 @@ class Catalog extends StatelessWidget {
       context,
       MaterialPageRoute(
         builder: (context) => ProductDetailPageContainer(
-              pageType: PageType.productDetail,
               product: product,
             ),
       ),
@@ -74,8 +72,8 @@ class CustomSliverHeader extends StatelessWidget {
     return SliverPersistentHeader(
       pinned: true,
       delegate: _SliverAppBarDelegate(
-        minHeight: AppStyle.matGridUnit(scale: 4),
-        maxHeight: AppStyle.matGridUnit(scale: 8),
+        minHeight: Spacing.matGridUnit(scale: 4),
+        maxHeight: Spacing.matGridUnit(scale: 8),
         child: Container(
           color: Theme.of(context).backgroundColor,
           child: GestureDetector(
@@ -84,14 +82,13 @@ class CustomSliverHeader extends StatelessWidget {
               children: <Widget>[
                 Center(
                   child: Container(
-                      decoration:
-                          BoxDecoration(color: AppStyle.displayTextColor),
+                      decoration: BoxDecoration(color: AppColors.textColor),
                       height: .5),
                 ),
                 Center(
                   child: Container(
-                    padding: EdgeInsets.symmetric(
-                        horizontal: AppStyle.matGridUnit()),
+                    padding:
+                        EdgeInsets.symmetric(horizontal: Spacing.matGridUnit()),
                     decoration:
                         BoxDecoration(color: Theme.of(context).backgroundColor),
                     child: Text(
