@@ -41,8 +41,8 @@ class _ECommerceAppState extends State<ECommerceApp> {
             bodyColor: AppColors.accentTextColor,
             displayColor: AppColors.accentTextColor,
           ),
-      primaryColor: AppColors.uiColor,
-      accentColor: AppColors.uiColor,
+      primaryColor: AppColors.primary,
+      accentColor: AppColors.primary,
       primaryIconTheme: Theme.of(context)
           .iconTheme
           .copyWith(color: AppColors.displayTextColor),

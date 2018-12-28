@@ -5,7 +5,7 @@ import 'package:e_commerce_complete/utils/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_lib/e_commerce_app.dart';
 
-class AppMenu extends StatelessWidget{
+class AppMenu extends StatelessWidget {
   Future _navigate(BuildContext context, String route) async {
     AppMenuController.of(context).activeRoute = route;
     await Navigator.pushNamed(context, route);
@@ -31,7 +31,7 @@ class AppMenu extends StatelessWidget{
     return isActive
         ? Container(
             decoration: BoxDecoration(
-                color: AppColors.primary[50].withOpacity(.5),
+                color: AppColors.primary[500].withOpacity(.3),
                 borderRadius: BorderRadius.circular(10.0)),
             child: tile,
             margin: EdgeInsets.all(Spacing.matGridUnit()),
@@ -46,7 +46,13 @@ class AppMenu extends StatelessWidget{
     return Drawer(
       child: ListView(
         children: <Widget>[
-          UserAccountsDrawerHeader(),
+          UserAccountsDrawerHeader(
+            currentAccountPicture: CircleAvatar(
+              backgroundImage: AssetImage("assets/images/half_avo.jpeg"),
+            ),
+            accountEmail: Text("eric@ericwindmill.com"),
+            accountName: Text("Eric Windmill"),
+          ),
           _buildTile(
               title: "Catalog",
               icon: Icons.apps,
@@ -61,11 +67,16 @@ class AppMenu extends StatelessWidget{
           _buildTile(
             icon: Icons.person,
             title: "User Settings",
-            isActive:
-                activeRoute == ECommerceRoutes.userSettingsPage,
+            isActive: activeRoute == ECommerceRoutes.userSettingsPage,
             onTap: () => _navigate(context, ECommerceRoutes.userSettingsPage),
           ),
-          AboutListTile(),
+          AboutListTile(
+            icon: Icon(Icons.info),
+            applicationName: "Produce Store",
+            aboutBoxChildren: <Widget>[
+              Text("Thanks for giving Flutter in Action a shot!"),
+            ],
+          ),
         ],
       ),
     );

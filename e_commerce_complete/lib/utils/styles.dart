@@ -28,9 +28,6 @@ class AppColors {
   /// for 'Accent' theme
   static const accentTextColor = Colors.white70;
 
-  /// For buttons and actions
-  static const uiColor = Color(0xFFB59FB5);
-
   static MaterialColor primary = new MaterialColor(0xFFC18083, _primarySwatch);
 }
 
