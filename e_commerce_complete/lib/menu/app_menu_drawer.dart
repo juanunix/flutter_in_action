@@ -7,7 +7,7 @@ import 'package:shared_lib/e_commerce_app.dart';
 
 class AppMenu extends StatelessWidget {
   Future _navigate(BuildContext context, String route) async {
-    AppMenuController.of(context).activeRoute = route;
+    AppBloc.of(context).activeRoute = route;
     await Navigator.pushNamed(context, route);
   }
 
@@ -41,7 +41,7 @@ class AppMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var activeRoute = AppMenuController.of(context).activeRoute;
+    var activeRoute = AppBloc.of(context).activeRoute;
 
     return Drawer(
       child: ListView(

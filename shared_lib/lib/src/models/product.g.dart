@@ -203,6 +203,12 @@ class _$ProductSerializer implements StructuredSerializer<Product> {
       serializers.serialize(object.title,
           specifiedType: const FullType(String)),
     ];
+    if (object.id != null) {
+      result
+        ..add('id')
+        ..add(serializers.serialize(object.id,
+            specifiedType: const FullType(String)));
+    }
     if (object.category != null) {
       result
         ..add('category')
@@ -230,6 +236,10 @@ class _$ProductSerializer implements StructuredSerializer<Product> {
       iterator.moveNext();
       final dynamic value = iterator.current;
       switch (key) {
+        case 'id':
+          result.id = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
         case 'imageTitle':
           result.imageTitle = serializers.deserialize(value,
               specifiedType: const FullType(ImageTitle)) as ImageTitle;
@@ -291,6 +301,8 @@ class _$ProductCategorySerializer
 
 class _$Product extends Product {
   @override
+  final String id;
+  @override
   final ImageTitle imageTitle;
   @override
   final String title;
@@ -302,7 +314,7 @@ class _$Product extends Product {
   factory _$Product([void updates(ProductBuilder b)]) =>
       (new ProductBuilder()..update(updates)).build();
 
-  _$Product._({this.imageTitle, this.title, this.category, this.cost})
+  _$Product._({this.id, this.imageTitle, this.title, this.category, this.cost})
       : super._() {
     if (imageTitle == null) {
       throw new BuiltValueNullFieldError('Product', 'imageTitle');
@@ -323,6 +335,7 @@ class _$Product extends Product {
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
     return other is Product &&
+        id == other.id &&
         imageTitle == other.imageTitle &&
         title == other.title &&
         category == other.category &&
@@ -332,7 +345,7 @@ class _$Product extends Product {
   @override
   int get hashCode {
     return $jf($jc(
-        $jc($jc($jc(0, imageTitle.hashCode), title.hashCode),
+        $jc($jc($jc($jc(0, id.hashCode), imageTitle.hashCode), title.hashCode),
             category.hashCode),
         cost.hashCode));
   }
@@ -340,6 +353,7 @@ class _$Product extends Product {
   @override
   String toString() {
     return (newBuiltValueToStringHelper('Product')
+          ..add('id', id)
           ..add('imageTitle', imageTitle)
           ..add('title', title)
           ..add('category', category)
@@ -350,6 +364,10 @@ class _$Product extends Product {
 
 class ProductBuilder implements Builder<Product, ProductBuilder> {
   _$Product _$v;
+
+  String _id;
+  String get id => _$this._id;
+  set id(String id) => _$this._id = id;
 
   ImageTitle _imageTitle;
   ImageTitle get imageTitle => _$this._imageTitle;
@@ -371,6 +389,7 @@ class ProductBuilder implements Builder<Product, ProductBuilder> {
 
   ProductBuilder get _$this {
     if (_$v != null) {
+      _id = _$v.id;
       _imageTitle = _$v.imageTitle;
       _title = _$v.title;
       _category = _$v.category;
@@ -397,6 +416,7 @@ class ProductBuilder implements Builder<Product, ProductBuilder> {
   _$Product build() {
     final _$result = _$v ??
         new _$Product._(
+            id: id,
             imageTitle: imageTitle,
             title: title,
             category: category,

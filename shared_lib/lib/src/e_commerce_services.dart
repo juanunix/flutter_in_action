@@ -1,0 +1,1 @@
+export 'services/catalog_service.dart';

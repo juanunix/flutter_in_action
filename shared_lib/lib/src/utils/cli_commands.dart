@@ -10,22 +10,6 @@ import 'package:shared_lib/src/utils/generate_weather_data.dart';
 
 Serializers standardSerializers = serializers;
 
-
-class GenerateEcommerceData extends Command {
-  @override
-  String get description => "Generate ecommerce data JSON";
-
-  @override
-  String get name => "data";
-
-  Future run() async {
-    var data = standardSerializers.serialize(populateCatalog());
-
-    new File('lib/src/content/ecommerce_data.json')
-        .writeAsString(json.encode(data));
-  }
-}
-
 class GenerateWeatherDataCommand extends Command {
   GenerateWeatherDataCommand();
 
@@ -43,6 +27,21 @@ class GenerateWeatherDataCommand extends Command {
           standardSerializers.serialize(helper.generateTenDayForecast(city));
     }
     new File('lib/src/content/weather_data.json')
+        .writeAsString(json.encode(data));
+  }
+}
+
+class GenerateEcommerceData extends Command {
+  @override
+  String get description => "Generate ecommerce data JSON";
+
+  @override
+  String get name => "data";
+
+  Future run() async {
+    var data = standardSerializers.serialize(populateCatalog());
+
+    new File('lib/src/content/ecommerce_data.json')
         .writeAsString(json.encode(data));
   }
 }

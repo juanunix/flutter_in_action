@@ -5,6 +5,8 @@ import 'package:built_value/serializer.dart';
 part 'product.g.dart';
 
 abstract class Product implements Built<Product, ProductBuilder> {
+  @nullable
+  String get id;
   ImageTitle get imageTitle;
   String get title;
   @nullable

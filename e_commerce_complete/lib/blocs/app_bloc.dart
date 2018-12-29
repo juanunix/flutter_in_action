@@ -1,23 +1,25 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutter_firebase_repository/catalog_service.dart';
 
-class AppMenuController extends StatefulWidget {
+class AppBloc extends StatefulWidget {
   final Widget child;
-  const AppMenuController({Key key, this.child}) : super(key: key);
+  final ServiceProvider provider;
+  const AppBloc({Key key, this.child, this.provider}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
-    return AppMenuControllerState();
+    return AppBlocState();
   }
 
-  static AppMenuControllerState of(BuildContext context) {
-    return (context.inheritFromWidgetOfExactType(_AppMenuControllerContainer)
-            as _AppMenuControllerContainer)
-        .controller;
+  static AppBlocState of(BuildContext context) {
+    return (context.inheritFromWidgetOfExactType(_AppBlocContainer)
+            as _AppBlocContainer)
+        .appData;
   }
 }
 
-class AppMenuControllerState extends State<AppMenuController> {
+class AppBlocState extends State<AppBloc> {
   String _activeRoute = '/'; // Initially, "home" is selected
   String get activeRoute => _activeRoute;
   set activeRoute(String route) {
@@ -31,20 +33,23 @@ class AppMenuControllerState extends State<AppMenuController> {
 
   @override
   Widget build(BuildContext context) {
-    return _AppMenuControllerContainer(
-      controller: this,
+    return _AppBlocContainer(
+      appData: this,
+      provider: widget.provider,
       child: widget.child,
     );
   }
 }
 
-class _AppMenuControllerContainer extends InheritedWidget {
-  final AppMenuControllerState controller;
+class _AppBlocContainer extends InheritedWidget {
+  final AppBlocState appData;
+  final ServiceProvider provider;
 
-  _AppMenuControllerContainer({
+  _AppBlocContainer({
     Key key,
-    @required this.controller,
+    @required this.appData,
     @required Widget child,
+    @required this.provider,
   }) : super(key: key, child: child);
 
   @override
@@ -55,4 +60,10 @@ class RouteChangeEvent {
   final String route;
 
   RouteChangeEvent(this.route);
+}
+
+class ServiceProvider {
+  final FlutterCatalogService catalogService;
+
+  ServiceProvider({@required this.catalogService});
 }

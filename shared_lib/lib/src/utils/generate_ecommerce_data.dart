@@ -37,3 +37,5 @@ Catalog populateCatalog() {
 
   return new Catalog((b) => b..availableProducts = catalog);
 }
+
+
