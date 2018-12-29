@@ -2,144 +2,142 @@
   "$": "Catalog",
   "availableProducts": [
     {
-      "title": "AppleInHand",
-      "imageName": "assets/images/apple-in-hand.jpg",
-      "cost": 1.0
+      "imageTitle": "AppleInHand",
+      "title": "Apple",
+      "category": "Fruit",
+      "cost": 0.7
     },
     {
-      "title": "Apricots",
-      "imageName": "assets/images/apricots.jpg",
-      "cost": 1.0
+      "imageTitle": "Apricots",
+      "title": "Apricot",
+      "category": "Fruit",
+      "cost": 2.41
     },
     {
+      "imageTitle": "Asparagus",
       "title": "Asparagus",
-      "imageName": "assets/images/asparagus.jpg",
-      "cost": 1.0
+      "category": "Veggies",
+      "cost": 1.01
     },
     {
-      "title": "AvocadoHalf",
-      "imageName": "assets/images/avocado-half.jpg",
-      "cost": 1.0
+      "imageTitle": "AvocadoHalf",
+      "title": "Avocado",
+      "category": "Fruit",
+      "cost": 2.34
     },
     {
-      "title": "AvocadoTwoHalves",
-      "imageName": "assets/images/avocado-two-halves.jpg",
-      "cost": 1.0
+      "imageTitle": "BlueberriesPile",
+      "title": "Blueberries",
+      "category": "Fruit",
+      "cost": 0.7
     },
     {
-      "title": "BlueberriesInHand",
-      "imageName": "assets/images/blueberries-in-hand.jpg",
-      "cost": 1.0
+      "imageTitle": "BroccoliPieces",
+      "title": "Broccoli",
+      "category": "Veggies",
+      "cost": 0.91
     },
     {
-      "title": "BlueberriesPile",
-      "imageName": "assets/images/blueberries-pile.jpg",
-      "cost": 1.0
+      "imageTitle": "BrusselSprouts",
+      "title": "Brussel Sprouts",
+      "category": "Veggies",
+      "cost": 3.03
     },
     {
-      "title": "BroccoliPieces",
-      "imageName": "assets/images/broccoli-pieces.jpg",
-      "cost": 1.0
+      "imageTitle": "CacaoBeans",
+      "title": "Cacao",
+      "category": "Nuts",
+      "cost": 0.7
     },
     {
-      "title": "BrusselSprouts",
-      "imageName": "assets/images/brussel-sprouts.jpg",
-      "cost": 1.0
-    },
-    {
-      "title": "CacaoBeans",
-      "imageName": "assets/images/cacao-beans.jpg",
-      "cost": 1.0
-    },
-    {
+      "imageTitle": "Carrots",
       "title": "Carrots",
-      "imageName": "assets/images/carrots.jpg",
-      "cost": 1.0
+      "category": "Veggies",
+      "cost": 1.02
     },
     {
+      "imageTitle": "Chesnuts",
       "title": "Chesnuts",
-      "imageName": "assets/images/chesnuts.jpeg",
-      "cost": 1.0
+      "category": "Nuts",
+      "cost": 0.7
     },
     {
-      "title": "ChoppedVeggies",
-      "imageName": "assets/images/chopped-veggies.jpg",
-      "cost": 1.0
-    },
-    {
+      "imageTitle": "Cupcake",
       "title": "Cupcake",
-      "imageName": "assets/images/cupcake.jpg",
-      "cost": 1.0
+      "category": "Treats",
+      "cost": 1.82
     },
     {
+      "imageTitle": "Eggs",
       "title": "Eggs",
-      "imageName": "assets/images/eggs.jpg",
-      "cost": 1.0
+      "category": "Protein",
+      "cost": 1.63
     },
     {
-      "title": "FrozenTreat",
-      "imageName": "assets/images/frozen-treat.jpg",
-      "cost": 1.0
+      "imageTitle": "FrozenTreat",
+      "title": "Ice Cream Bar",
+      "category": "Treats",
+      "cost": 0.7
     },
     {
+      "imageTitle": "Lettuce",
       "title": "Lettuce",
-      "imageName": "assets/images/lettuce.jpg",
-      "cost": 1.0
+      "category": "Veggies",
+      "cost": 0.7
     },
     {
+      "imageTitle": "Lime",
       "title": "Lime",
-      "imageName": "assets/images/lime.jpg",
-      "cost": 1.0
+      "category": "Fruit",
+      "cost": 3.18
     },
     {
+      "imageTitle": "Milkshake",
       "title": "Milkshake",
-      "imageName": "assets/images/milkshake.jpg",
-      "cost": 1.0
+      "category": "Treats",
+      "cost": 0.7
     },
     {
-      "title": "MilkshakeInHand",
-      "imageName": "assets/images/milkshake-in-hand.jpg",
-      "cost": 1.0
-    },
-    {
+      "imageTitle": "Nectarines",
       "title": "Nectarines",
-      "imageName": "assets/images/nectarines.jpg",
-      "cost": 1.0
+      "category": "Fruit",
+      "cost": 0.7
     },
     {
+      "imageTitle": "Oranges",
       "title": "Oranges",
-      "imageName": "assets/images/oranges.jpg",
-      "cost": 1.0
+      "category": "Fruit",
+      "cost": 2.32
     },
     {
+      "imageTitle": "Papaya",
       "title": "Papaya",
-      "imageName": "assets/images/papaya.jpg",
-      "cost": 1.0
+      "category": "Fruit",
+      "cost": 3.16
     },
     {
-      "title": "PopcicleInHand",
-      "imageName": "assets/images/popcicle-in-hand.jpg",
-      "cost": 1.0
+      "imageTitle": "PopcicleInHand",
+      "title": "Popcicle",
+      "category": "Treats",
+      "cost": 2.84
     },
     {
-      "title": "SlicedOranges",
-      "imageName": "assets/images/sliced-oranges.jpg",
-      "cost": 1.0
+      "imageTitle": "SpoonsFullOfSpices",
+      "title": "Spices",
+      "category": "Cooking",
+      "cost": 1.45
     },
     {
-      "title": "SpoonsFullOfSpices",
-      "imageName": "assets/images/spoons-full-of-spices.jpg",
-      "cost": 1.0
+      "imageTitle": "StrawberriesInHand",
+      "title": "Strawberries",
+      "category": "Fruit",
+      "cost": 0.83
     },
     {
-      "title": "StrawberriesInHand",
-      "imageName": "assets/images/strawberries-in-hand.jpg",
-      "cost": 1.0
-    },
-    {
+      "imageTitle": "Walnuts",
       "title": "Walnuts",
-      "imageName": "assets/images/walnuts.jpg",
-      "cost": 1.0
+      "category": "Nuts",
+      "cost": 2.83
     }
   ]
 }

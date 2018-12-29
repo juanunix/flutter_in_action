@@ -57,7 +57,9 @@ Map<String, ImageTitle> availableProductsToImage = {
   "Spices": ImageTitle.SpoonsFullOfSpices,
   "Strawberries": ImageTitle.StrawberriesInHand,
   "Walnuts": ImageTitle.Walnuts,
-  // Begin Categories Region
+};
+
+Map<String, ImageTitle> categoriesToImageMap = {
   "Veggies": ImageTitle.ChoppedVeggies,
   "Fruit": ImageTitle.BlueberriesInHand,
   "Treats": ImageTitle.MilkshakeInHand,
@@ -66,11 +68,38 @@ Map<String, ImageTitle> availableProductsToImage = {
   "Cooking": ImageTitle.SpoonsFullOfSpices,
 };
 
-Map<ProductCategory, List<String>> categoizeProducts = {
-  ProductCategory.Fruit: ["Apple", "Apricot", "Avocado", "Blueberries", "Lime", "Nectarines", "Oranges", "Papaya", "Strawberries", ],
-  ProductCategory.Cooking: ["Spices",],
-  ProductCategory.Veggies: ["Asparagus", "Broccoli", "Brussel Sprouts", "Carrots", "Lettuce",],
-  ProductCategory.Nuts: ["Cacao", "Chesnuts", "Walnuts",],
+Map<ProductCategory, List<String>> categorizeProducts = {
+  ProductCategory.Fruit: [
+    "Apple",
+    "Apricot",
+    "Avocado",
+    "Blueberries",
+    "Lime",
+    "Nectarines",
+    "Oranges",
+    "Papaya",
+    "Strawberries",
+  ],
+  ProductCategory.Cooking: [
+    "Spices",
+  ],
+  ProductCategory.Veggies: [
+    "Asparagus",
+    "Broccoli",
+    "Brussel Sprouts",
+    "Carrots",
+    "Lettuce",
+  ],
+  ProductCategory.Nuts: [
+    "Cacao",
+    "Chesnuts",
+    "Walnuts",
+  ],
   ProductCategory.Protein: ["Eggs"],
-  ProductCategory.Treats: ["Cupcake", "Ice Cream Bar", "Milkshake", "Popcicle",],
+  ProductCategory.Treats: [
+    "Cupcake",
+    "Ice Cream Bar",
+    "Milkshake",
+    "Popcicle",
+  ],
 };
