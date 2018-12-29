@@ -13,6 +13,9 @@ part 'serializers.g.dart';
   TemperatureUnit,
   WeatherDescription,
   Product,
+  ProductCategory,
+  ImageTitle,
+  Catalog,
 ])
 final Serializers serializers =
     (_$serializers.toBuilder()..addPlugin(StandardJsonPlugin())).build();

@@ -6,17 +6,17 @@ import 'package:e_commerce_complete/widget/product_detail_card.dart';
 import 'package:shared_lib/e_commerce_app.dart';
 
 class Catalog extends StatelessWidget {
-  final List<Product> products = [
-    Product((b) => b
-      ..imageName = "Avocado"
-      ..title = "Avocado"),
-    Product((b) => b
-      ..imageName = "Avocado"
-      ..title = "Avocado"),
-    Product((b) => b
-      ..imageName = "Avocado"
-      ..title = "Avocado"),
-  ];
+//  final List<Product> products = [
+//    Product((b) => b
+//      ..imageName = "Avocado"
+//      ..title = "Avocado"),
+//    Product((b) => b
+//      ..imageName = "Avocado"
+//      ..title = "Avocado"),
+//    Product((b) => b
+//      ..imageName = "Avocado"
+//      ..title = "Avocado"),
+//  ];
 
   Future _toProductDetailPage(Product product, BuildContext context) async {
     Navigator.push(
@@ -46,8 +46,8 @@ class Catalog extends StatelessWidget {
             (BuildContext context, int index) {
               return ProductDetailCard(
                 key: ValueKey(index.toString()),
-                onTap: () => _toProductDetailPage(products[index], context),
-                product: products[index],
+                onTap: () => _toProductDetailPage(null, context), //TODO
+                product: null //TODO,
               );
             },
             childCount: 3,

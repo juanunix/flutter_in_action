@@ -1,9 +1,4 @@
-import 'dart:convert';
 import 'dart:math' as math;
-import 'dart:async';
-import 'dart:io';
-
-import 'package:args/command_runner.dart';
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/serializer.dart';
 import 'package:shared_lib/src/weather_app_models.dart';
@@ -98,24 +93,4 @@ class WeatherDataHelper {
   }
 }
 
-/// CLI Tool to generate JSON
-class GenerateWeatherDataCommand extends Command {
-  GenerateWeatherDataCommand();
 
-  @override
-  String get description => 'Generate weather data JSON';
-
-  @override
-  String get name => 'data';
-
-  Future run() async {
-    var data = {};
-    for (var city in allCities) {
-      var helper = WeatherDataHelper();
-      data[city] =
-          standardSerializers.serialize(helper.generateTenDayForecast(city));
-    }
-    new File('lib/src/content/weather_data.json')
-        .writeAsString(json.encode(data));
-  }
-}

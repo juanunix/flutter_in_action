@@ -26,7 +26,7 @@ class ProductDetailCard extends StatelessWidget {
               image: DecorationImage(
                 fit: BoxFit.cover,
                 image: AssetImage(
-                  'assets/images/half_avo.jpeg',
+                  'assets/images/apple-in-hand.jpg',
                 ),
               ),
             ),
@@ -45,7 +45,7 @@ class ProductDetailCard extends StatelessWidget {
                 Spacing.matGridUnit(scale: .5),
               ),
               child: Center(
-                child: Text(product.title,
+                child: Text("TODO",
                     style: Theme.of(context).primaryTextTheme.subhead),
               ),
             ),

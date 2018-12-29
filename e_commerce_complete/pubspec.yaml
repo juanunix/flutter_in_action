@@ -21,4 +21,30 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
-  - assets/images/half_avo.jpeg
+  - assets/images/apple-in-hand.jpg
+  - assets/images/apricots.jpg
+  - assets/images/asparagus.jpg
+  - assets/images/avocado-half.jpg
+  - assets/images/avocado-two-halves.jpg
+  - assets/images/blueberries-in-hand.jpg
+  - assets/images/blueberries-pile.jpg
+  - assets/images/broccoli-pieces.jpg
+  - assets/images/brussel-sprouts.jpg
+  - assets/images/cacao-beans.jpg
+  - assets/images/carrots.jpg
+  - assets/images/chesnuts.jpeg
+  - assets/images/chopped_veggies.jpg
+  - assets/images/cupcake.jpg
+  - assets/images/eggs.jpg
+  - assets/images/frozen-treat.jpg
+  - assets/images/lettuce.jpg
+  - assets/images/lime.jpg
+  - assets/images/milkshake.jpg
+  - assets/images/milkshake-in-hand.jpg
+  - assets/images/nectarines.jpg
+  - assets/images/oranges.jpg
+  - assets/images/papaya.jpg
+  - assets/images/popcicle-in-hand.jpg
+  - assets/images/sliced-oranges.jpg
+  - assets/images/strawberries-in-hand.jpg
+  - assets/images/walnuts.jpg

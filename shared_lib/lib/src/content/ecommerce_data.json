@@ -1,0 +1,145 @@
+{
+  "$": "Catalog",
+  "availableProducts": [
+    {
+      "title": "AppleInHand",
+      "imageName": "assets/images/apple-in-hand.jpg",
+      "cost": 1.0
+    },
+    {
+      "title": "Apricots",
+      "imageName": "assets/images/apricots.jpg",
+      "cost": 1.0
+    },
+    {
+      "title": "Asparagus",
+      "imageName": "assets/images/asparagus.jpg",
+      "cost": 1.0
+    },
+    {
+      "title": "AvocadoHalf",
+      "imageName": "assets/images/avocado-half.jpg",
+      "cost": 1.0
+    },
+    {
+      "title": "AvocadoTwoHalves",
+      "imageName": "assets/images/avocado-two-halves.jpg",
+      "cost": 1.0
+    },
+    {
+      "title": "BlueberriesInHand",
+      "imageName": "assets/images/blueberries-in-hand.jpg",
+      "cost": 1.0
+    },
+    {
+      "title": "BlueberriesPile",
+      "imageName": "assets/images/blueberries-pile.jpg",
+      "cost": 1.0
+    },
+    {
+      "title": "BroccoliPieces",
+      "imageName": "assets/images/broccoli-pieces.jpg",
+      "cost": 1.0
+    },
+    {
+      "title": "BrusselSprouts",
+      "imageName": "assets/images/brussel-sprouts.jpg",
+      "cost": 1.0
+    },
+    {
+      "title": "CacaoBeans",
+      "imageName": "assets/images/cacao-beans.jpg",
+      "cost": 1.0
+    },
+    {
+      "title": "Carrots",
+      "imageName": "assets/images/carrots.jpg",
+      "cost": 1.0
+    },
+    {
+      "title": "Chesnuts",
+      "imageName": "assets/images/chesnuts.jpeg",
+      "cost": 1.0
+    },
+    {
+      "title": "ChoppedVeggies",
+      "imageName": "assets/images/chopped-veggies.jpg",
+      "cost": 1.0
+    },
+    {
+      "title": "Cupcake",
+      "imageName": "assets/images/cupcake.jpg",
+      "cost": 1.0
+    },
+    {
+      "title": "Eggs",
+      "imageName": "assets/images/eggs.jpg",
+      "cost": 1.0
+    },
+    {
+      "title": "FrozenTreat",
+      "imageName": "assets/images/frozen-treat.jpg",
+      "cost": 1.0
+    },
+    {
+      "title": "Lettuce",
+      "imageName": "assets/images/lettuce.jpg",
+      "cost": 1.0
+    },
+    {
+      "title": "Lime",
+      "imageName": "assets/images/lime.jpg",
+      "cost": 1.0
+    },
+    {
+      "title": "Milkshake",
+      "imageName": "assets/images/milkshake.jpg",
+      "cost": 1.0
+    },
+    {
+      "title": "MilkshakeInHand",
+      "imageName": "assets/images/milkshake-in-hand.jpg",
+      "cost": 1.0
+    },
+    {
+      "title": "Nectarines",
+      "imageName": "assets/images/nectarines.jpg",
+      "cost": 1.0
+    },
+    {
+      "title": "Oranges",
+      "imageName": "assets/images/oranges.jpg",
+      "cost": 1.0
+    },
+    {
+      "title": "Papaya",
+      "imageName": "assets/images/papaya.jpg",
+      "cost": 1.0
+    },
+    {
+      "title": "PopcicleInHand",
+      "imageName": "assets/images/popcicle-in-hand.jpg",
+      "cost": 1.0
+    },
+    {
+      "title": "SlicedOranges",
+      "imageName": "assets/images/sliced-oranges.jpg",
+      "cost": 1.0
+    },
+    {
+      "title": "SpoonsFullOfSpices",
+      "imageName": "assets/images/spoons-full-of-spices.jpg",
+      "cost": 1.0
+    },
+    {
+      "title": "StrawberriesInHand",
+      "imageName": "assets/images/strawberries-in-hand.jpg",
+      "cost": 1.0
+    },
+    {
+      "title": "Walnuts",
+      "imageName": "assets/images/walnuts.jpg",
+      "cost": 1.0
+    }
+  ]
+}

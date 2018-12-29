@@ -48,7 +48,7 @@ class AppMenu extends StatelessWidget {
         children: <Widget>[
           UserAccountsDrawerHeader(
             currentAccountPicture: CircleAvatar(
-              backgroundImage: AssetImage("assets/images/half_avo.jpeg"),
+              backgroundImage: AssetImage("assets/images/apple-in-hand.jpg"),
             ),
             accountEmail: Text("eric@ericwindmill.com"),
             accountName: Text("Eric Windmill"),
