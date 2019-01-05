@@ -25,7 +25,7 @@ class FlutterCatalogService implements CatalogService {
   /// is passed back from Firestore to the stream, it'll
   /// add it's ID if it needs to.
   @override
-  Future<Null> addNewProduct(Product product) {
+  Future<DocumentReference> addNewProduct(Product product) {
     var json = standardSerializers.serialize(product);
     return _catalogRef().add(json);
   }
@@ -34,7 +34,18 @@ class FlutterCatalogService implements CatalogService {
   Stream<List<Product>> streamProducts() {
     return _catalogRef().snapshots().map((QuerySnapshot s) {
       return s.documents.map((DocumentSnapshot doc) {
-        return deserializeWithFirestoreId(doc, Product.serializer);
+        return deserializeWithFirestoreId(doc, Product.serializer) as Product;
+      }).toList();
+    });
+  }
+
+  Stream<List<Product>> streamProductCategory(ProductCategory category) {
+    return _catalogRef()
+        .where("category", isEqualTo: category)
+        .snapshots()
+        .map((QuerySnapshot s) {
+      return s.documents.map((DocumentSnapshot doc) {
+        return deserializeWithFirestoreId(doc, Product.serializer) as Product;
       }).toList();
     });
   }

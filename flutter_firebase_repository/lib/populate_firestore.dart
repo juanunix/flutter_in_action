@@ -13,11 +13,12 @@ Future<void> populateFirestore(Firestore firestore) async {
     var firestoreService = FlutterCatalogService(firestore);
     Catalog catalog = populateCatalog();
     try {
-      return catalog.availableProducts.forEach((e) {
+      catalog.availableProducts.forEach((e) {
         firestoreService.addNewProduct(e);
       });
     } catch (e) {
-      throw(e);
+      throw (e);
     }
+    return null;
   }
 }

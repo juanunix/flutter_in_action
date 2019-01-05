@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutter_firebase_repository/cart_service.dart';
 import 'package:flutter_firebase_repository/catalog_service.dart';
 
 class AppBloc extends StatefulWidget {
@@ -26,6 +27,8 @@ class AppBlocState extends State<AppBloc> {
     if (_activeRoute == route) return;
     _activeRoute = route;
   }
+
+  ServiceProvider get provider => widget.provider;
 
   void dispose() {
     super.dispose();
@@ -64,6 +67,7 @@ class RouteChangeEvent {
 
 class ServiceProvider {
   final FlutterCatalogService catalogService;
+  final FlutterCartService cartService;
 
-  ServiceProvider({@required this.catalogService});
+  ServiceProvider({@required this.catalogService, @required this.cartService});
 }

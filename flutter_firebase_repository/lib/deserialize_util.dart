@@ -7,8 +7,17 @@ dynamic deserializeWithFirestoreId(
     DocumentSnapshot doc, Serializer serializer) {
   var dataWithID;
   if (doc["id"] == null || doc["id"] == "") {
+    // add quantity if it's null
+    var qty =
+        (doc.data["quantityInCart"] != null || doc.data["quantityInCart"] != "")
+            ? doc.data["quantityInCart"]
+            : "0";
+
     dataWithID = new Map.from(doc.data)
-      ..addEntries([new MapEntry("id", doc.documentID)]);
+      ..addEntries([
+        new MapEntry("id", doc.documentID),
+        new MapEntry("quantity", qty),
+      ]);
   }
   return standardSerializers.deserializeWith(serializer, dataWithID);
 }

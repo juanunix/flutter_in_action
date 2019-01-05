@@ -25,6 +25,7 @@ Product createProduct(String productName) {
     ..title = productName
     ..imageTitle = availableProductsToImage[productName]
     ..category = getCategoryForProduct(productName)
+    ..quantityInCart = 0
     ..cost = determineCost());
 }
 

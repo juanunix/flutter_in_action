@@ -5,8 +5,9 @@ import 'package:shared_lib/e_commerce_app.dart';
 class ProductDetailCard extends StatelessWidget {
   final Product product;
   final GestureTapCallback onTap;
+  final GestureLongPressCallback onLongPress;
 
-  const ProductDetailCard({Key key, this.product, this.onTap})
+  const ProductDetailCard({Key key, this.product, this.onTap, this.onLongPress})
       : super(key: key);
 
   @override
@@ -18,6 +19,7 @@ class ProductDetailCard extends StatelessWidget {
       shape: RoundedRectangleBorder(borderRadius: _radius),
       child: GestureDetector(
         onTap: onTap,
+        onLongPress: onLongPress,
         child: RepaintBoundary(
           child: Container(
             alignment: Alignment.bottomCenter,
@@ -26,7 +28,7 @@ class ProductDetailCard extends StatelessWidget {
               image: DecorationImage(
                 fit: BoxFit.cover,
                 image: AssetImage(
-                  'assets/images/apple-in-hand.jpg',
+                  product.imageUrl
                 ),
               ),
             ),
@@ -45,7 +47,7 @@ class ProductDetailCard extends StatelessWidget {
                 Spacing.matGridUnit(scale: .5),
               ),
               child: Center(
-                child: Text("TODO",
+                child: Text(product.title,
                     style: Theme.of(context).primaryTextTheme.subhead),
               ),
             ),

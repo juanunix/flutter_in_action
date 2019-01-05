@@ -1,23 +1,15 @@
+import 'package:e_commerce_complete/blocs/app_bloc.dart';
+import 'package:e_commerce_complete/blocs/cart_bloc.dart';
+import 'package:e_commerce_complete/blocs/catalog_bloc.dart';
 import 'package:e_commerce_complete/page/base/page_container.dart';
 import 'package:e_commerce_complete/utils/styles.dart';
+import 'package:e_commerce_complete/widget/add_to_cart_bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
 import 'package:e_commerce_complete/widget/product_detail_card.dart';
 import 'package:shared_lib/e_commerce_app.dart';
 
 class Catalog extends StatelessWidget {
-//  final List<Product> products = [
-//    Product((b) => b
-//      ..imageName = "Avocado"
-//      ..title = "Avocado"),
-//    Product((b) => b
-//      ..imageName = "Avocado"
-//      ..title = "Avocado"),
-//    Product((b) => b
-//      ..imageName = "Avocado"
-//      ..title = "Avocado"),
-//  ];
-
   Future _toProductDetailPage(Product product, BuildContext context) async {
     Navigator.push(
       context,
@@ -29,30 +21,58 @@ class Catalog extends StatelessWidget {
     );
   }
 
+  void _showQuickAddToCart(BuildContext context, Product product) async {
+    var _cartService = AppBloc.of(context).provider.cartService;
+    var _cartBloc = new CartBloc(_cartService);
+
+    int qty = await showModalBottomSheet<int>(
+        context: context,
+        builder: (BuildContext context) {
+          return AddToCartBottomSheet(
+            key: Key(product.id),
+          );
+        });
+
+    _addToCart(product, qty, _cartBloc);
+  }
+
+  void _addToCart(Product product, int quantity, CartBloc _bloc) {
+    _bloc.addToCart(product, quantity);
+  }
+
   @override
   Widget build(BuildContext context) {
+    var _service = AppBloc.of(context).provider.catalogService;
+    var _bloc = new CatalogBloc(_service);
+
     return CustomScrollView(
       slivers: <Widget>[
         CustomSliverHeader(
           headerText: "Categories",
         ),
-        SliverGrid(
-          gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            mainAxisSpacing: 16.0,
-            crossAxisSpacing: 16.0,
-          ),
-          delegate: new SliverChildBuilderDelegate(
-            (BuildContext context, int index) {
-              return ProductDetailCard(
-                key: ValueKey(index.toString()),
-                onTap: () => _toProductDetailPage(null, context), //TODO
-                product: null //TODO,
+        StreamBuilder(
+            stream: _bloc.allProducts,
+            builder: (context, AsyncSnapshot<List<Product>> snapshot) {
+              return SliverGrid(
+                gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  mainAxisSpacing: 16.0,
+                  crossAxisSpacing: 16.0,
+                ),
+                delegate: new SliverChildBuilderDelegate(
+                  (BuildContext context, int index) {
+                    var _product = snapshot.data[index];
+                    return ProductDetailCard(
+                      key: ValueKey(_product.imageTitle.toString()),
+                      onTap: () => _toProductDetailPage(_product, context),
+                      onLongPress: () => _showQuickAddToCart(context, _product),
+                      product: _product,
+                    );
+                  },
+                  childCount: snapshot.data?.length ?? 0,
+                ),
               );
-            },
-            childCount: 3,
-          ),
-        ),
+            }),
       ],
     );
   }
@@ -132,80 +152,3 @@ class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
         child != oldDelegate.child;
   }
 }
-
-//class CollapsingListState extends StatelessWidget {
-//  makeHeader() {}
-//
-//  @override
-//  Widget build(BuildContext context) {
-//    return CustomScrollView(
-//      slivers: <Widget>[
-//        SliverGrid.extent(
-//          maxCrossAxisExtent: 150.0,
-//          children: [
-//            ProductDetailCard(),
-//          ],
-//        ),
-//        SliverFixedExtentList(
-//          itemExtent: 120.0,
-//          delegate: SliverChildListDelegate(
-//            [
-//              ProductDetailCard(),
-//              Container(color: Colors.purple),
-//              Container(color: Colors.green),
-//              Container(color: Colors.orange),
-//              Container(color: Colors.yellow),
-//            ],
-//          ),
-//        ),
-//        SliverGrid(
-//          gridDelegate: new SliverGridDelegateWithMaxCrossAxisExtent(
-//            maxCrossAxisExtent: 200.0,
-//            mainAxisSpacing: 10.0,
-//            crossAxisSpacing: 10.0,
-//            childAspectRatio: 4.0,
-//          ),
-//          delegate: new SliverChildBuilderDelegate(
-//            (BuildContext context, int index) {
-//              return new Container(
-//                alignment: Alignment.center,
-//                color: Colors.teal[100 * (index % 9)],
-//                child: new Text('grid item $index'),
-//              );
-//            },
-//            childCount: 20,
-//          ),
-//        ),
-//        // Yes, this could also be a SliverFixedExtentList. Writing
-//        // this way just for an example of SliverList construction.
-//        SliverList(
-//          delegate: SliverChildListDelegate(
-//            [
-//              Container(color: Colors.pink, height: 150.0),
-//              Container(color: Colors.cyan, height: 150.0),
-//              Container(color: Colors.indigo, height: 150.0),
-//              Container(color: Colors.blue, height: 150.0),
-//            ],
-//          ),
-//        ),
-//        SliverToBoxAdapter(
-//          child: Container(
-//            height: 100.0,
-//            child: ListView.builder(
-//              scrollDirection: Axis.horizontal,
-//              itemCount: 10,
-//              itemBuilder: (context, index) {
-//                return Container(
-//                  width: 100.0,
-//                  child: Card(
-//                    child: Text('data'),
-//                  ),
-//                );
-//              },
-//            ),
-//          ),
-//        ),
-//      ],
-//    );
-//  }
-//}

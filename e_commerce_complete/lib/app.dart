@@ -36,6 +36,7 @@ class _ECommerceAppState extends State<ECommerceApp> {
       primaryIconTheme: Theme.of(context)
           .iconTheme
           .copyWith(color: AppColors.displayTextColor),
+      buttonColor: AppColors.primary[100],
     );
 
     return MaterialApp(
