@@ -37,7 +37,6 @@ class FlutterCartService {
 
   Stream<int> streamCartCount() {
     return _cartCountRef().snapshots().map((DocumentSnapshot s) {
-      print('new snap');
       return s.data["totalCount"];
     });
   }

@@ -1,14 +1,28 @@
+import 'package:e_commerce_complete/blocs/app_bloc.dart';
+import 'package:e_commerce_complete/blocs/cart_bloc.dart';
 import 'package:e_commerce_complete/utils/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_lib/e_commerce_app.dart';
 
-class ProductDetailPage extends StatelessWidget {
+class ProductDetailPage extends StatefulWidget {
   final Product product;
 
   const ProductDetailPage({Key key, this.product}) : super(key: key);
 
   @override
+  ProductDetailPageState createState() {
+    return new ProductDetailPageState();
+  }
+}
+
+class ProductDetailPageState extends State<ProductDetailPage> {
+  int _quantity = 0;
+
+  @override
   Widget build(BuildContext context) {
+    var _cartService = AppBloc.of(context).provider.cartService;
+    var _cartBloc = new CartBloc(_cartService);
+
     return Stack(
       children: <Widget>[
         BackgroundImage(),
@@ -38,14 +52,14 @@ class ProductDetailPage extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Text(
-                          product.title,
+                          widget.product.title,
                           style: Theme.of(context)
                               .textTheme
                               .display1
                               .copyWith(color: AppColors.displayTextColor),
                         ),
                         Text(
-                          product.category.toString(),
+                          widget.product.category.toString(),
                           style: Theme.of(context)
                               .textTheme
                               .subhead
@@ -54,7 +68,7 @@ class ProductDetailPage extends StatelessWidget {
                       ],
                     ),
                     Text(
-                      "\$ ${product.cost} / lb",
+                      "\$ ${widget.product.cost} / lb",
                       style: Theme.of(context)
                           .textTheme
                           .headline
@@ -70,8 +84,8 @@ class ProductDetailPage extends StatelessWidget {
                       Flexible(
                         flex: 1,
                         child: Hero(
-                          tag: product.title,
-                          child: Image.asset(product.imageUrl),
+                          tag: widget.product.title,
+                          child: Image.asset(widget.product.imageUrl),
                         ),
                       ),
                       Flexible(
@@ -87,18 +101,28 @@ class ProductDetailPage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
                     IconButton(
-                      onPressed: () => print('increase'),
+                      onPressed: () {
+                        if (_quantity > 0) {
+                          setState(() => _quantity--);
+                        }
+                      },
                       icon: Icon(Icons.remove),
                     ),
-                    Text("0"),
+                    Text(
+                      _quantity.toString(),
+                      style: Theme.of(context).primaryTextTheme.headline,
+                    ),
                     IconButton(
-                      onPressed: () => print('increase'),
+                      onPressed: () {
+                        setState(() => _quantity++);
+                      },
                       icon: Icon(Icons.add),
                     ),
                     RaisedButton(
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(25.0)),
-                      onPressed: () => print('adding to cart'),
+                      onPressed: () =>
+                          _cartBloc.addToCart(widget.product, _quantity),
                       textColor: Colors.white,
                       child: Text("Add to Cart"),
                     ),

@@ -2,7 +2,6 @@ import 'package:e_commerce_complete/utils/styles.dart';
 import 'package:flutter/material.dart';
 
 class AddToCartBottomSheet extends StatefulWidget {
-
   const AddToCartBottomSheet({Key key}) : super(key: key);
 
   @override
@@ -11,7 +10,6 @@ class AddToCartBottomSheet extends StatefulWidget {
 
 class _AddToCartBottomSheetState extends State<AddToCartBottomSheet> {
   int _quantity = 0;
-
 
   @override
   Widget build(BuildContext context) {

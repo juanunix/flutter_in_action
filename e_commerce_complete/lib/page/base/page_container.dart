@@ -48,7 +48,7 @@ class ProductDetailPageContainer extends PageContainerBase {
   Widget get body => ProductDetailPage(product: product);
 
   @override
-  String get pageTitle => "TODO";
+  String get pageTitle => product.title;
 
   @override
   Widget get menuDrawer => null;
