@@ -25,7 +25,6 @@ Product createProduct(String productName) {
     ..title = productName
     ..imageTitle = availableProductsToImage[productName]
     ..category = getCategoryForProduct(productName)
-    ..quantityInCart = 0
     ..cost = determineCost());
 }
 
@@ -39,4 +38,11 @@ Catalog populateCatalog() {
   return new Catalog((b) => b..availableProducts = catalog);
 }
 
+Cart buildInitialCart() {
+  var items = new MapBuilder<String, int>();
 
+  return new Cart((b) => b
+    ..items = items
+    ..totalCartItems = 0
+    ..totalCost = 0.00);
+}

@@ -20,6 +20,7 @@ part of 'serializers.dart';
 // ignore_for_file: test_types_in_equals
 
 Serializers _$serializers = (new Serializers().toBuilder()
+      ..add(Cart.serializer)
       ..add(Catalog.serializer)
       ..add(Forecast.serializer)
       ..add(ForecastDay.serializer)
@@ -38,5 +39,9 @@ Serializers _$serializers = (new Serializers().toBuilder()
           () => new ListBuilder<Product>())
       ..addBuilderFactory(
           const FullType(BuiltList, const [const FullType(Weather)]),
-          () => new ListBuilder<Weather>()))
+          () => new ListBuilder<Weather>())
+      ..addBuilderFactory(
+          const FullType(
+              BuiltMap, const [const FullType(String), const FullType(int)]),
+          () => new MapBuilder<String, int>()))
     .build();

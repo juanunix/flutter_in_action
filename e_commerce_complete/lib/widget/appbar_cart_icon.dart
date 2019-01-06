@@ -1,6 +1,7 @@
 import 'package:e_commerce_complete/blocs/app_bloc.dart';
 import 'package:e_commerce_complete/blocs/cart_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_lib/e_commerce_app.dart';
 
 class AppBarCartIcon extends StatelessWidget {
   @override
@@ -15,7 +16,8 @@ class AppBarCartIcon extends StatelessWidget {
           new IconButton(
             icon: new Icon(Icons.shopping_cart),
             // buttons are disabled if `onPressed` is null
-            onPressed: () => print('pressed'),
+            onPressed: () =>
+                Navigator.of(context).pushNamed(ECommerceRoutes.cartPage),
           ),
           new Positioned(
             top: 4.0,

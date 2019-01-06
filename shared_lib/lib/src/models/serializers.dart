@@ -16,6 +16,7 @@ part 'serializers.g.dart';
   ProductCategory,
   ImageTitle,
   Catalog,
+  Cart,
 ])
 final Serializers serializers =
     (_$serializers.toBuilder()..addPlugin(StandardJsonPlugin())).build();

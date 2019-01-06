@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_firebase_repository/cart_service.dart';
 import 'package:flutter_firebase_repository/catalog_service.dart';

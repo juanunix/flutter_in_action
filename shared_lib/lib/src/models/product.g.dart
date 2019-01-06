@@ -225,12 +225,6 @@ class _$ProductSerializer implements StructuredSerializer<Product> {
         ..add(serializers.serialize(object.cost,
             specifiedType: const FullType(double)));
     }
-    if (object.quantityInCart != null) {
-      result
-        ..add('quantityInCart')
-        ..add(serializers.serialize(object.quantityInCart,
-            specifiedType: const FullType(int)));
-    }
 
     return result;
   }
@@ -266,10 +260,6 @@ class _$ProductSerializer implements StructuredSerializer<Product> {
         case 'cost':
           result.cost = serializers.deserialize(value,
               specifiedType: const FullType(double)) as double;
-          break;
-        case 'quantityInCart':
-          result.quantityInCart = serializers.deserialize(value,
-              specifiedType: const FullType(int)) as int;
           break;
       }
     }
@@ -324,19 +314,11 @@ class _$Product extends Product {
   final ProductCategory category;
   @override
   final double cost;
-  @override
-  final int quantityInCart;
 
   factory _$Product([void updates(ProductBuilder b)]) =>
       (new ProductBuilder()..update(updates)).build();
 
-  _$Product._(
-      {this.id,
-      this.imageTitle,
-      this.title,
-      this.category,
-      this.cost,
-      this.quantityInCart})
+  _$Product._({this.id, this.imageTitle, this.title, this.category, this.cost})
       : super._() {
     if (imageTitle == null) {
       throw new BuiltValueNullFieldError('Product', 'imageTitle');
@@ -361,20 +343,15 @@ class _$Product extends Product {
         imageTitle == other.imageTitle &&
         title == other.title &&
         category == other.category &&
-        cost == other.cost &&
-        quantityInCart == other.quantityInCart;
+        cost == other.cost;
   }
 
   @override
   int get hashCode {
     return $jf($jc(
-        $jc(
-            $jc(
-                $jc($jc($jc(0, id.hashCode), imageTitle.hashCode),
-                    title.hashCode),
-                category.hashCode),
-            cost.hashCode),
-        quantityInCart.hashCode));
+        $jc($jc($jc($jc(0, id.hashCode), imageTitle.hashCode), title.hashCode),
+            category.hashCode),
+        cost.hashCode));
   }
 
   @override
@@ -384,8 +361,7 @@ class _$Product extends Product {
           ..add('imageTitle', imageTitle)
           ..add('title', title)
           ..add('category', category)
-          ..add('cost', cost)
-          ..add('quantityInCart', quantityInCart))
+          ..add('cost', cost))
         .toString();
   }
 }
@@ -413,11 +389,6 @@ class ProductBuilder implements Builder<Product, ProductBuilder> {
   double get cost => _$this._cost;
   set cost(double cost) => _$this._cost = cost;
 
-  int _quantityInCart;
-  int get quantityInCart => _$this._quantityInCart;
-  set quantityInCart(int quantityInCart) =>
-      _$this._quantityInCart = quantityInCart;
-
   ProductBuilder();
 
   ProductBuilder get _$this {
@@ -427,7 +398,6 @@ class ProductBuilder implements Builder<Product, ProductBuilder> {
       _title = _$v.title;
       _category = _$v.category;
       _cost = _$v.cost;
-      _quantityInCart = _$v.quantityInCart;
       _$v = null;
     }
     return this;
@@ -454,8 +424,7 @@ class ProductBuilder implements Builder<Product, ProductBuilder> {
             imageTitle: imageTitle,
             title: title,
             category: category,
-            cost: cost,
-            quantityInCart: quantityInCart);
+            cost: cost);
     replace(_$result);
     return _$result;
   }

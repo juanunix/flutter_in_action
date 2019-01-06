@@ -1,4 +1,3 @@
-import 'package:e_commerce_complete/utils/styles.dart';
 import 'package:e_commerce_complete/widget/appbar_cart_icon.dart';
 import 'package:flutter/material.dart';
 
@@ -18,7 +17,7 @@ abstract class PageContainerBase extends StatelessWidget {
     return Scaffold(
       backgroundColor: Theme.of(context).backgroundColor,
       appBar: AppBar(
-        backgroundColor: Theme.of(context).backgroundColor,
+        backgroundColor: Colors.transparent,
         elevation: 0.0,
         title: Text(pageTitle),
         textTheme: Theme.of(context).primaryTextTheme,

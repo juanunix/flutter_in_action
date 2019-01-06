@@ -14,8 +14,6 @@ abstract class Product implements Built<Product, ProductBuilder> {
   ProductCategory get category;
   @nullable
   double get cost;
-  @nullable
-  int get quantityInCart;
 
   Product._();
 
