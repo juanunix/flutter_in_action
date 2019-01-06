@@ -48,7 +48,7 @@ class Catalog extends StatelessWidget {
     return CustomScrollView(
       slivers: <Widget>[
         CustomSliverHeader(
-          headerText: "Categories",
+          headerText: "Products",
         ),
         StreamBuilder(
             stream: _bloc.allProducts,
@@ -56,8 +56,8 @@ class Catalog extends StatelessWidget {
               return SliverGrid(
                 gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
-                  mainAxisSpacing: 16.0,
-                  crossAxisSpacing: 16.0,
+                  mainAxisSpacing: 8.0,
+                  crossAxisSpacing: 8.0,
                 ),
                 delegate: new SliverChildBuilderDelegate(
                   (BuildContext context, int index) {

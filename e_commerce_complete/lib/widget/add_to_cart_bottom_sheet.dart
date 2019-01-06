@@ -61,7 +61,8 @@ class _AddToCartBottomSheetState extends State<AddToCartBottomSheet> {
             ),
           ),
           RaisedButton(
-            color: AppColors.primary[100],
+            color: AppColors.primary[500],
+            textColor: Colors.white,
             child: Text(
               "Add To Cart".toUpperCase(),
             ),

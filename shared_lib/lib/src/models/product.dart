@@ -45,6 +45,7 @@ class ImageTitle extends EnumClass {
   static const ImageTitle Cupcake = _$Cupcake;
   static const ImageTitle Eggs = _$Eggs;
   static const ImageTitle FrozenTreat = _$FrozenTreat;
+  static const ImageTitle FruitStand = _$FruitStand;
   static const ImageTitle Lettuce = _$Lettuce;
   static const ImageTitle Lime = _$Lime;
   static const ImageTitle Milkshake = _$Milkshake;

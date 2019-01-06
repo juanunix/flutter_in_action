@@ -15,40 +15,41 @@ class ProductDetailCard extends StatelessWidget {
     var _radius = BorderRadius.circular(10.0);
 
     return Card(
-      elevation: 12.0,
+      elevation: 2.0,
       shape: RoundedRectangleBorder(borderRadius: _radius),
       child: GestureDetector(
         onTap: onTap,
         onLongPress: onLongPress,
         child: RepaintBoundary(
-          child: Container(
-            alignment: Alignment.bottomCenter,
-            decoration: BoxDecoration(
-              borderRadius: _radius,
-              image: DecorationImage(
-                fit: BoxFit.cover,
-                image: AssetImage(
-                  product.imageUrl
-                ),
-              ),
-            ),
+          child: Hero(
+            tag: product.title,
             child: Container(
-              constraints: BoxConstraints.expand(
-                height: Spacing.matGridUnit(scale: 5),
-              ),
+              alignment: Alignment.bottomCenter,
               decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.only(
-                  bottomRight: Radius.circular(10.0),
-                  bottomLeft: Radius.circular(10.0),
+                borderRadius: _radius,
+                image: DecorationImage(
+                  fit: BoxFit.cover,
+                  image: AssetImage(product.imageUrl),
                 ),
               ),
-              padding: EdgeInsets.all(
-                Spacing.matGridUnit(scale: .5),
-              ),
-              child: Center(
-                child: Text(product.title,
-                    style: Theme.of(context).primaryTextTheme.subhead),
+              child: Container(
+                constraints: BoxConstraints.expand(
+                  height: Spacing.matGridUnit(scale: 5),
+                ),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.only(
+                    bottomRight: Radius.circular(10.0),
+                    bottomLeft: Radius.circular(10.0),
+                  ),
+                ),
+                padding: EdgeInsets.all(
+                  Spacing.matGridUnit(scale: .5),
+                ),
+                child: Center(
+                  child: Text(product.title,
+                      style: Theme.of(context).primaryTextTheme.subhead),
+                ),
               ),
             ),
           ),

@@ -18,25 +18,25 @@ class _ECommerceAppState extends State<ECommerceApp> {
       scaffoldBackgroundColor: AppColors.background,
       // content
       textTheme: Theme.of(context).textTheme.apply(
-        bodyColor: AppColors.textColor,
-        displayColor: AppColors.textColor,
-      ),
+            bodyColor: AppColors.textColor,
+            displayColor: AppColors.textColor,
+          ),
       // headings -- contrasts 'primary color'
       primaryTextTheme: Theme.of(context).textTheme.apply(
-        bodyColor: AppColors.displayTextColor,
-        displayColor: AppColors.displayTextColor,
-      ),
+            bodyColor: AppColors.displayTextColor,
+            displayColor: AppColors.displayTextColor,
+          ),
       // ui -- contrasts 'accent color'
       accentTextTheme: Theme.of(context).textTheme.apply(
-        bodyColor: AppColors.accentTextColor,
-        displayColor: AppColors.accentTextColor,
-      ),
+            bodyColor: AppColors.accentTextColor,
+            displayColor: AppColors.accentTextColor,
+          ),
       primaryColor: AppColors.primary,
       accentColor: AppColors.accent,
       primaryIconTheme: Theme.of(context)
           .iconTheme
           .copyWith(color: AppColors.displayTextColor),
-      buttonColor: AppColors.primary[100],
+      buttonColor: AppColors.primary[500],
     );
 
     return MaterialApp(

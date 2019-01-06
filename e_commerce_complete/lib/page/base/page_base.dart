@@ -27,10 +27,7 @@ abstract class PageContainerBase extends StatelessWidget {
         ],
       ),
       drawer: menuDrawer,
-      body: Padding(
-        padding: EdgeInsets.all(Spacing.matGridUnit(scale: 1.5)),
-        child: body,
-      ),
+      body: body,
     );
   }
 }

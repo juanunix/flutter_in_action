@@ -19,6 +19,7 @@ Map<ImageTitle, String> productImageFile = {
   ImageTitle.Cupcake: "assets/images/cupcake.jpg",
   ImageTitle.Eggs: "assets/images/eggs.jpg",
   ImageTitle.FrozenTreat: "assets/images/frozen-treat.jpg",
+  ImageTitle.FruitStand: "assets/images/fruit_stand.png",
   ImageTitle.Lettuce: "assets/images/lettuce.jpg",
   ImageTitle.Lime: "assets/images/lime.jpg",
   ImageTitle.Milkshake: "assets/images/milkshake.jpg",
@@ -61,7 +62,7 @@ Map<String, ImageTitle> availableProductsToImage = {
 
 Map<String, ImageTitle> categoriesToImageMap = {
   "Veggies": ImageTitle.ChoppedVeggies,
-  "Fruit": ImageTitle.BlueberriesInHand,
+  "Fruit": ImageTitle.FruitStand,
   "Treats": ImageTitle.MilkshakeInHand,
   "Nuts": ImageTitle.Chesnuts,
   "Protein": ImageTitle.Eggs,

@@ -35,6 +35,7 @@ const ImageTitle _$ChoppedVeggies = const ImageTitle._('ChoppedVeggies');
 const ImageTitle _$Cupcake = const ImageTitle._('Cupcake');
 const ImageTitle _$Eggs = const ImageTitle._('Eggs');
 const ImageTitle _$FrozenTreat = const ImageTitle._('FrozenTreat');
+const ImageTitle _$FruitStand = const ImageTitle._('FruitStand');
 const ImageTitle _$Lettuce = const ImageTitle._('Lettuce');
 const ImageTitle _$Lime = const ImageTitle._('Lime');
 const ImageTitle _$Milkshake = const ImageTitle._('Milkshake');
@@ -84,6 +85,8 @@ ImageTitle _$valueOfImageTitle(String name) {
       return _$Eggs;
     case 'FrozenTreat':
       return _$FrozenTreat;
+    case 'FruitStand':
+      return _$FruitStand;
     case 'Lettuce':
       return _$Lettuce;
     case 'Lime':
@@ -131,6 +134,7 @@ final BuiltSet<ImageTitle> _$imageTitleValues =
   _$Cupcake,
   _$Eggs,
   _$FrozenTreat,
+  _$FruitStand,
   _$Lettuce,
   _$Lime,
   _$Milkshake,

@@ -29,6 +29,8 @@ class AppColors {
   /// for 'Accent' theme
   static const accentTextColor = Colors.white70;
 
+  static const purple = Color(0xFFB59FB5);
+
   static MaterialColor primary = new MaterialColor(0xFFC18083, _primarySwatch);
   static MaterialColor accent = new MaterialColor(0xFFFEEAE6, _accentSwatch);
 }
