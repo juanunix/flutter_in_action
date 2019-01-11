@@ -1,20 +1,31 @@
+/*
+ * Copyright 2018 Eric Windmill. All rights reserved.
+ * Use of this source code is governed by the MIT license that can be found in the LICENSE file.
+ */
+
 import 'package:e_commerce_complete/blocs/app_bloc.dart';
 import 'package:e_commerce_complete/blocs/cart_bloc.dart';
+import 'package:e_commerce_complete/utils/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_lib/e_commerce_app.dart';
 
 class AppBarCartIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    var _service = AppBloc.of(context).provider.cartService;
-    var _bloc = CartBloc(_service);
+    var _bloc = AppBloc.of(context).blocProvider.cartBloc;
 
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: new Stack(
         children: <Widget>[
+          Container(
+            child: CustomPaint(
+              painter: AppBarIconBackground(),
+            ),
+          ),
           new IconButton(
             icon: new Icon(Icons.shopping_cart),
+            color: AppColors.textColor,
             // buttons are disabled if `onPressed` is null
             onPressed: () =>
                 Navigator.of(context).pushNamed(ECommerceRoutes.cartPage),
@@ -45,4 +56,30 @@ class AppBarCartIcon extends StatelessWidget {
       ),
     );
   }
+}
+
+class AppBarIconBackground extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    var _paintBrush = Paint()..color = Colors.white;
+    var right = size.width;
+    var shadowPath = Path();
+
+    shadowPath.moveTo(right + 90, 40.0);
+    shadowPath.lineTo(right + 10, 40.0);
+    shadowPath.arcToPoint(new Offset(right + 20, 0.0),
+        radius: Radius.circular(20.0));
+    shadowPath.lineTo(right + 90, 0.0);
+    shadowPath.close();
+
+    // draw shadow underneath the figure
+    canvas.drawShadow(shadowPath, Colors.black54, 3.0, false);
+
+    var rightBase = new Rect.fromLTWH(right + 20, 0.0, 70.0, 40.0);
+    canvas.drawRect(rightBase, _paintBrush);
+    canvas.drawCircle(Offset(right + 18, 20.0), 20.0, _paintBrush);
+  }
+
+  @override
+  bool shouldRepaint(CustomPainter oldDelegate) => false;
 }

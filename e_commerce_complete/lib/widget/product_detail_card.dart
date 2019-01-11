@@ -1,3 +1,8 @@
+/*
+ * Copyright 2018 Eric Windmill. All rights reserved.
+ * Use of this source code is governed by the MIT license that can be found in the LICENSE file.
+ */
+
 import 'package:e_commerce_complete/utils/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_lib/e_commerce_app.dart';
@@ -22,7 +27,7 @@ class ProductDetailCard extends StatelessWidget {
         onLongPress: onLongPress,
         child: RepaintBoundary(
           child: Hero(
-            tag: product.title,
+            tag: product.uniqueId,
             child: Container(
               alignment: Alignment.bottomCenter,
               decoration: BoxDecoration(

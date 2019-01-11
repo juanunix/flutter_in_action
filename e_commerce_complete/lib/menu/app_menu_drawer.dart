@@ -1,3 +1,8 @@
+/*
+ * Copyright 2018 Eric Windmill. All rights reserved.
+ * Use of this source code is governed by the MIT license that can be found in the LICENSE file.
+ */
+
 import 'dart:async';
 
 import 'package:e_commerce_complete/blocs/app_bloc.dart';
@@ -52,6 +57,10 @@ class AppMenu extends StatelessWidget {
             ),
             accountEmail: Text("eric@ericwindmill.com"),
             accountName: Text("Eric Windmill"),
+            onDetailsPressed: () {
+              Navigator.pushReplacementNamed(
+                  context, ECommerceRoutes.userSettingsPage);
+            },
           ),
           _buildTile(
               title: "Catalog",
@@ -74,7 +83,7 @@ class AppMenu extends StatelessWidget {
             icon: Icon(Icons.info),
             applicationName: "Produce Store",
             aboutBoxChildren: <Widget>[
-              Text("Thanks for giving Flutter in Action a shot!"),
+              Text("Thanks for reading Flutter in Action!"),
             ],
           ),
         ],

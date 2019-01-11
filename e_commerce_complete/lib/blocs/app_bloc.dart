@@ -1,11 +1,21 @@
+/*
+ * Copyright 2018 Eric Windmill. All rights reserved.
+ * Use of this source code is governed by the MIT license that can be found in the LICENSE file.
+ */
+
+import 'package:e_commerce_complete/blocs/cart_bloc.dart';
+import 'package:e_commerce_complete/blocs/catalog_bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_firebase_repository/cart_service.dart';
-import 'package:flutter_firebase_repository/catalog_service.dart';
+import 'package:shared_lib/e_commerce_app.dart';
 
 class AppBloc extends StatefulWidget {
   final Widget child;
-  final ServiceProvider provider;
-  const AppBloc({Key key, this.child, this.provider}) : super(key: key);
+  final BlocProvider blocProvider;
+  const AppBloc({
+    Key key,
+    @required this.child,
+    @required this.blocProvider,
+  }) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
@@ -27,7 +37,7 @@ class AppBlocState extends State<AppBloc> {
     _activeRoute = route;
   }
 
-  ServiceProvider get provider => widget.provider;
+  BlocProvider get blocProvider => widget.blocProvider;
 
   void dispose() {
     super.dispose();
@@ -37,7 +47,7 @@ class AppBlocState extends State<AppBloc> {
   Widget build(BuildContext context) {
     return _AppBlocContainer(
       appData: this,
-      provider: widget.provider,
+      blocProvider: widget.blocProvider,
       child: widget.child,
     );
   }
@@ -45,13 +55,13 @@ class AppBlocState extends State<AppBloc> {
 
 class _AppBlocContainer extends InheritedWidget {
   final AppBlocState appData;
-  final ServiceProvider provider;
+  final BlocProvider blocProvider;
 
   _AppBlocContainer({
     Key key,
     @required this.appData,
     @required Widget child,
-    @required this.provider,
+    @required this.blocProvider,
   }) : super(key: key, child: child);
 
   @override
@@ -65,8 +75,18 @@ class RouteChangeEvent {
 }
 
 class ServiceProvider {
-  final FlutterCatalogService catalogService;
-  final FlutterCartService cartService;
+  final CatalogService catalogService;
+  final CartService cartService;
 
-  ServiceProvider({@required this.catalogService, @required this.cartService});
+  ServiceProvider({
+    @required this.catalogService,
+    @required this.cartService,
+  });
+}
+
+class BlocProvider {
+  CartBloc cartBloc;
+  CatalogBloc catalogBloc;
+
+  BlocProvider({@required this.cartBloc, @required this.catalogBloc});
 }

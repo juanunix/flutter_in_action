@@ -1,3 +1,8 @@
+/*
+ * Copyright 2018 Eric Windmill. All rights reserved.
+ * Use of this source code is governed by the MIT license that can be found in the LICENSE file.
+ */
+
 import 'package:e_commerce_complete/page/base/page_base.dart';
 import 'package:e_commerce_complete/page/base/page_container.dart';
 import 'package:e_commerce_complete/utils/styles.dart';
@@ -14,9 +19,8 @@ class _ECommerceAppState extends State<ECommerceApp> {
   Widget build(BuildContext context) {
     /// All constants can be found in [utils/styles.dart]
     var _theme = ThemeData(
-      backgroundColor: AppColors.background,
-      scaffoldBackgroundColor: AppColors.background,
       // content
+      backgroundColor: AppColors.background,
       textTheme: Theme.of(context).textTheme.apply(
             bodyColor: AppColors.textColor,
             displayColor: AppColors.textColor,

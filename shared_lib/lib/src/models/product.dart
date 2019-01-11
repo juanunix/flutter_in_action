@@ -2,6 +2,7 @@ import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 import 'package:shared_lib/src/utils/product_map.dart';
+import 'package:shared_lib/src/utils/uuid.dart';
 
 part 'product.g.dart';
 
@@ -21,6 +22,8 @@ abstract class Product implements Built<Product, ProductBuilder> {
   static Serializer<Product> get serializer => _$productSerializer;
 
   String get imageUrl => productImageFile[imageTitle];
+
+  String get uniqueId => new Uuid().generateV4();
 }
 
 class ImageTitle extends EnumClass {

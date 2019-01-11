@@ -1,3 +1,8 @@
+/*
+ * Copyright 2018 Eric Windmill. All rights reserved.
+ * Use of this source code is governed by the MIT license that can be found in the LICENSE file.
+ */
+
 import 'package:e_commerce_complete/blocs/app_bloc.dart';
 import 'package:e_commerce_complete/blocs/cart_bloc.dart';
 import 'package:e_commerce_complete/utils/styles.dart';
@@ -20,14 +25,12 @@ class ProductDetailPageState extends State<ProductDetailPage> {
 
   @override
   Widget build(BuildContext context) {
-    var _cartService = AppBloc.of(context).provider.cartService;
-    var _cartBloc = new CartBloc(_cartService);
+    var _cartBloc = AppBloc.of(context).blocProvider.cartBloc;
 
     return Stack(
       children: <Widget>[
-        BackgroundImage(),
         Positioned(
-          bottom: 10.0,
+          bottom: 100.0,
           left: 30.0, // half of the "padding" we added in the containers width
           child: Container(
             padding: EdgeInsets.all(Spacing.matGridUnit(scale: 3)),
@@ -84,16 +87,18 @@ class ProductDetailPageState extends State<ProductDetailPage> {
                       Flexible(
                         flex: 1,
                         child: Hero(
-                          tag: widget.product.title,
+                          tag: widget.product.uniqueId,
                           child: Image.asset(widget.product.imageUrl),
                         ),
                       ),
                       Flexible(
-                          flex: 1,
-                          child: Padding(
-                            padding: const EdgeInsets.only(left: 8.0),
-                            child: Text("This is a nice thing you can buy."),
-                          )),
+                        flex: 1,
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 8.0),
+                          child: Text(
+                              "This is a nice ${widget.product.title} thing you can buy and eat to grow strong."),
+                        ),
+                      ),
                     ],
                   ),
                 ),
@@ -135,46 +140,4 @@ class ProductDetailPageState extends State<ProductDetailPage> {
       ],
     );
   }
-}
-
-class BackgroundImage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      width: MediaQuery.of(context).size.width,
-      height: MediaQuery.of(context).size.height * .75,
-      child: ClipPath(
-        clipper: BackgroundImageClipper(),
-        child: Container(
-          decoration: BoxDecoration(
-              image: DecorationImage(
-            colorFilter: ColorFilter.mode(Colors.black26, BlendMode.darken),
-            alignment: Alignment.topCenter,
-            fit: BoxFit.fitWidth,
-            image: AssetImage("assets/images/fruit_stand.png"),
-          )),
-        ),
-      ),
-    );
-  }
-}
-
-class BackgroundImageClipper extends CustomClipper<Path> {
-  @override
-  Path getClip(Size size) {
-    var path = Path();
-
-    path.lineTo(0.0, size.height); // bottom left corner
-    path.lineTo(size.width - 150.0, size.height);
-    path.lineTo(size.width, size.height - 150.0); // bottom right corner
-    path.lineTo(size.width, 0.0); // top right corner
-
-    // Draws a straight line from current point to the first point of the path.
-    // In this case (0, 0), since that's where the paths start by default.
-    path.close();
-    return path;
-  }
-
-  @override
-  bool shouldReclip(CustomClipper<Path> oldClipper) => false;
 }

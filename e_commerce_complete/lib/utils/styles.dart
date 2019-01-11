@@ -1,3 +1,8 @@
+/*
+ * Copyright 2018 Eric Windmill. All rights reserved.
+ * Use of this source code is governed by the MIT license that can be found in the LICENSE file.
+ */
+
 import 'package:flutter/material.dart';
 
 class Spacing {
@@ -14,13 +19,13 @@ class Spacing {
 class AppColors {
   /// App Background
   /// Off white
-  static const background = Color(0xFFF5F5F5);
+  static const background = Color(0xFFF7F7F7);
   static const cardBackground = Colors.white;
   static const activeFillColor = Color(0xFFE0E0E0);
 
   /// Text Theme
   /// For cards, content, and canvas:
-  static const textColor = Colors.black54;
+  static const textColor = Color.fromRGBO(35, 35, 50, .7);
 
   /// For 'Primary' theme
   /// For headings
@@ -60,3 +65,15 @@ Map<int, Color> _accentSwatch = {
   800: Color(0xFFD24D00),
   900: Color(0xFFBA4000),
 };
+
+class Elevation {
+  static List<BoxShadow> low = [
+    BoxShadow(color: Colors.black26, offset: Offset(1.0, 1.0), blurRadius: 1.0),
+  ];
+
+  static List<BoxShadow> high = [
+    BoxShadow(color: Colors.black26, offset: Offset(4.0, 4.0), blurRadius: 4.0),
+    BoxShadow(color: Colors.black26, offset: Offset(2.0, 2.0), blurRadius: 2.0),
+    BoxShadow(color: Colors.black26, offset: Offset(1.0, 1.0), blurRadius: 1.0),
+  ];
+}

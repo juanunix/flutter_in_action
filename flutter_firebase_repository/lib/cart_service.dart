@@ -1,4 +1,8 @@
-import 'package:built_collection/built_collection.dart';
+/*
+ * Copyright 2018 Eric Windmill. All rights reserved.
+ * Use of this source code is governed by the MIT license that can be found in the LICENSE file.
+ */
+
 import 'package:built_value/serializer.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:shared_lib/e_commerce_app.dart';
@@ -8,7 +12,7 @@ Serializers standardSerializers = serializers;
 
 final String mockFirebaseUserId = 'user_1';
 
-class FlutterCartService {
+class FlutterCartService implements CartService {
   static const String appStatePath = 'appState';
 
   final Firestore firestore;
@@ -52,8 +56,9 @@ class FlutterCartService {
     });
   }
 
-  Future<void> updateCart(Product p, int qty) async {
-    print('updating...');
+  // Update the _total_ cart items and the count of the
+  // specific product
+  Future<void> addToCart(Product p, int qty) async {
     var newTotalCount = await _currentCartCount() + qty;
     var newProductTotal = await _currentCountForProduct(p) + qty;
     Cart cart = await _currentCart();
@@ -64,6 +69,20 @@ class FlutterCartService {
         (v) => v = newProductTotal,
         ifAbsent: () => newProductTotal,
       ));
+    return _updateCart(cart);
+  }
+
+  Future<void> removeFromCart(String p, int qty) async {
+    var cartItemTotal = await _currentCartCount();
+    Cart cart = await _currentCart();
+    cart = cart.rebuild((CartBuilder b) => b
+      ..totalCartItems = cartItemTotal - qty
+      ..items.remove(p));
+
+    return _updateCart(cart);
+  }
+
+  Future<void> _updateCart(Cart cart) {
     var json = serializers.serialize(cart);
     return _cartRef(mockFirebaseUserId).setData({
       "cart": json,

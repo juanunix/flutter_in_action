@@ -1,3 +1,8 @@
+/*
+ * Copyright 2018 Eric Windmill. All rights reserved.
+ * Use of this source code is governed by the MIT license that can be found in the LICENSE file.
+ */
+
 import 'package:e_commerce_complete/blocs/app_bloc.dart';
 import 'package:e_commerce_complete/blocs/cart_bloc.dart';
 import 'package:e_commerce_complete/blocs/catalog_bloc.dart';
@@ -8,8 +13,26 @@ import 'package:flutter/material.dart';
 import 'dart:math' as math;
 import 'package:e_commerce_complete/widget/product_detail_card.dart';
 import 'package:shared_lib/e_commerce_app.dart';
+import 'package:shared_lib/shared_lib.dart';
 
-class Catalog extends StatelessWidget {
+class Catalog extends StatefulWidget {
+  @override
+  CatalogState createState() {
+    return new CatalogState();
+  }
+}
+
+class CatalogState extends State<Catalog> {
+  CatalogBloc _bloc;
+  List<Widget> slivers = [];
+  bool loading = true;
+
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    slivers = [];
+    _bloc = AppBloc.of(context).blocProvider.catalogBloc;
+  }
+
   Future _toProductDetailPage(Product product, BuildContext context) async {
     Navigator.push(
       context,
@@ -22,8 +45,7 @@ class Catalog extends StatelessWidget {
   }
 
   void _showQuickAddToCart(BuildContext context, Product product) async {
-    var _cartService = AppBloc.of(context).provider.cartService;
-    var _cartBloc = new CartBloc(_cartService);
+    var _cartBloc = AppBloc.of(context).blocProvider.cartBloc;
 
     int qty = await showModalBottomSheet<int>(
         context: context,
@@ -41,40 +63,54 @@ class Catalog extends StatelessWidget {
   }
 
   @override
-  Widget build(BuildContext context) {
-    var _service = AppBloc.of(context).provider.catalogService;
-    var _bloc = new CatalogBloc(_service);
+  void dispose() {
+    super.dispose();
+    _bloc.close(); // close all streams
+  }
 
-    return CustomScrollView(
-      slivers: <Widget>[
-        CustomSliverHeader(
-          headerText: "Products",
-        ),
-        StreamBuilder(
-            stream: _bloc.allProducts,
-            builder: (context, AsyncSnapshot<List<Product>> snapshot) {
-              return SliverGrid(
-                gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  mainAxisSpacing: 8.0,
-                  crossAxisSpacing: 8.0,
-                ),
-                delegate: new SliverChildBuilderDelegate(
-                  (BuildContext context, int index) {
-                    var _product = snapshot.data[index];
-                    return ProductDetailCard(
-                      key: ValueKey(_product.imageTitle.toString()),
-                      onTap: () => _toProductDetailPage(_product, context),
-                      onLongPress: () => _showQuickAddToCart(context, _product),
-                      product: _product,
-                    );
-                  },
-                  childCount: snapshot.data?.length ?? 0,
-                ),
-              );
-            }),
-      ],
-    );
+  List<Widget> _buildSlivers(BuildContext context) {
+    if (slivers.isNotEmpty && slivers != null) {
+      return slivers;
+    }
+    _bloc.productStreamsByCategory.forEach((Stream<List<Product>> dataStream) {
+      slivers.add(StreamBuilder(
+          stream: dataStream,
+          builder: (context, AsyncSnapshot<List<Product>> snapshot) {
+            return CustomSliverHeader(
+              headerText:
+                  snapshot?.data?.first?.category.toString() ?? "header",
+            );
+          }));
+      slivers.add(StreamBuilder(
+          stream: dataStream,
+          builder: (context, AsyncSnapshot<List<Product>> snapshot) {
+            return SliverGrid(
+              gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                mainAxisSpacing: 8.0,
+                crossAxisSpacing: 8.0,
+              ),
+              delegate: new SliverChildBuilderDelegate(
+                (BuildContext context, int index) {
+                  var _product = snapshot.data[index];
+                  return ProductDetailCard(
+                    key: ValueKey(_product.imageTitle.toString()),
+                    onTap: () => _toProductDetailPage(_product, context),
+                    onLongPress: () => _showQuickAddToCart(context, _product),
+                    product: _product,
+                  );
+                },
+                childCount: snapshot.data?.length ?? 0,
+              ),
+            );
+          }));
+    });
+    return slivers;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return CustomScrollView(slivers: _buildSlivers(context));
   }
 }
 
@@ -91,7 +127,7 @@ class CustomSliverHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return SliverPersistentHeader(
       pinned: true,
-      delegate: _SliverAppBarDelegate(
+      delegate: SliverAppBarDelegate(
         minHeight: Spacing.matGridUnit(scale: 4),
         maxHeight: Spacing.matGridUnit(scale: 8),
         child: Container(
@@ -126,8 +162,8 @@ class CustomSliverHeader extends StatelessWidget {
   }
 }
 
-class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
-  _SliverAppBarDelegate({
+class SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
+  SliverAppBarDelegate({
     @required this.minHeight,
     @required this.maxHeight,
     @required this.child,
@@ -146,7 +182,7 @@ class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
   }
 
   @override
-  bool shouldRebuild(_SliverAppBarDelegate oldDelegate) {
+  bool shouldRebuild(SliverAppBarDelegate oldDelegate) {
     return maxHeight != oldDelegate.maxHeight ||
         minHeight != oldDelegate.minHeight ||
         child != oldDelegate.child;
