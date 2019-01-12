@@ -3,35 +3,29 @@
  * Use of this source code is governed by the MIT license that can be found in the LICENSE file.
  */
 
-import 'package:e_commerce_complete/page/base/page_base.dart';
-import 'package:e_commerce_complete/page/base/page_container.dart';
-import 'package:e_commerce_complete/utils/material_route_transition.dart';
-import 'package:e_commerce_complete/utils/styles.dart';
+import 'package:e_commerce_start_chapter_7/page/base/page_base.dart';
+import 'package:e_commerce_start_chapter_7/page/base/page_container.dart';
+import 'package:e_commerce_start_chapter_7/utils/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_lib/e_commerce_app.dart';
 
-class ECommerceApp extends StatefulWidget {
-  @override
-  _ECommerceAppState createState() => _ECommerceAppState();
-}
-
-class _ECommerceAppState extends State<ECommerceApp> {
+class ECommerceApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     /// All constants can be found in [utils/styles.dart]
     var _theme = ThemeData(
-      // content
+      /// content
       backgroundColor: AppColors.background,
       textTheme: Theme.of(context).textTheme.apply(
             bodyColor: AppColors.textColor,
             displayColor: AppColors.textColor,
           ),
-      // headings -- contrasts 'primary color'
+      /// headings -- contrasts 'primary color'
       primaryTextTheme: Theme.of(context).textTheme.apply(
             bodyColor: AppColors.displayTextColor,
             displayColor: AppColors.displayTextColor,
           ),
-      // ui -- contrasts 'accent color'
+      /// ui -- contrasts 'accent color'
       accentTextTheme: Theme.of(context).textTheme.apply(
             bodyColor: AppColors.accentTextColor,
             displayColor: AppColors.accentTextColor,
@@ -47,13 +41,15 @@ class _ECommerceAppState extends State<ECommerceApp> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: _theme,
+      home: PageContainer(pageType: PageType.Catalog,),
       routes: {
-        ECommerceRoutes.catalogPage: (context) =>
-            PageContainer(pageType: PageType.Catalog),
-        ECommerceRoutes.cartPage: (context) =>
-            PageContainer(pageType: PageType.Cart),
-        ECommerceRoutes.userSettingsPage: (context) =>
-            PageContainer(pageType: PageType.Settings),
+        // TODO chapter_7: Setup named routes
+//        ECommerceRoutes.catalogPage: (context) =>
+//            PageContainer(pageType: PageType.Catalog),
+//        ECommerceRoutes.cartPage: (context) =>
+//            PageContainer(pageType: PageType.Cart),
+//        ECommerceRoutes.userSettingsPage: (context) =>
+//            PageContainer(pageType: PageType.Settings),
       },
     );
   }

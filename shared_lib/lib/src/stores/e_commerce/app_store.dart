@@ -8,8 +8,9 @@ import 'dart:async';
 import 'package:shared_lib/e_commerce_app.dart';
 import 'package:shared_lib/src/utils/generate_ecommerce_data.dart';
 
-/// Mocks a firebase service --
-/// updates a datasource that *isn't* persistent, then notifies listeners.
+/// Mocks a reactive database service, like Firestore:
+/// updates a datasource that *isn't* persistent,
+/// then notifies listeners.
 class AppStore {
   Cart _cart;
   Catalog _catalog;
@@ -23,7 +24,7 @@ class AppStore {
     _cart = buildInitialCart();
     _catalog = populateCatalog();
     // emit initial events, notifying the UI
-    Future.delayed(Duration(seconds: 1), () {
+    Future.delayed(Duration(milliseconds: 500), () {
       catalogNotifier.add(_catalog);
       cartNotifier.add(_cart);
     });
