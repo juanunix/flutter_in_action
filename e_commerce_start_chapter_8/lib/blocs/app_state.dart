@@ -3,41 +3,42 @@
  * Use of this source code is governed by the MIT license that can be found in the LICENSE file.
  */
 
-import 'package:e_commerce_complete/blocs/cart_bloc.dart';
-import 'package:e_commerce_complete/blocs/catalog_bloc.dart';
+import 'package:e_commerce_start_chapter_8/blocs/cart_bloc.dart';
+import 'package:e_commerce_start_chapter_8/blocs/catalog_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_lib/e_commerce_app.dart';
 
-class AppBloc extends StatefulWidget {
+class AppStateManager extends StatefulWidget {
   final Widget child;
   final BlocProvider blocProvider;
-  const AppBloc({
+  const AppStateManager({
     Key key,
     @required this.child,
     @required this.blocProvider,
   }) : super(key: key);
 
   @override
-  State<StatefulWidget> createState() {
-    return AppBlocState();
-  }
+  State<StatefulWidget> createState() => AppState();
 
-  static AppBlocState of(BuildContext context) {
-    return (context.inheritFromWidgetOfExactType(_AppBlocContainer)
-            as _AppBlocContainer)
+  /// TODO chapter 8: write an `of` method.
+  static AppState of(BuildContext context) {
+    return (context.inheritFromWidgetOfExactType(_AppStateContainer)
+            as _AppStateContainer)
         .appData;
   }
 }
 
-class AppBlocState extends State<AppBloc> {
-  String _activeRoute = '/'; // Initially, "home" is selected
-  String get activeRoute => _activeRoute;
-  set activeRoute(String route) {
-    if (_activeRoute == route) return;
-    _activeRoute = route;
-  }
-
+class AppState extends State<AppStateManager> {
   BlocProvider get blocProvider => widget.blocProvider;
+
+  /// TODO chapter 8: implement initial InheritedWidget method
+  /// The following two members aren't needed once you've
+  /// begin implementing the blocs.
+  int cartCount = 0;
+  void updateCartCount(int count) {
+    setState(() => cartCount += count);
+  }
+  /// end region
 
   void dispose() {
     super.dispose();
@@ -45,23 +46,21 @@ class AppBlocState extends State<AppBloc> {
 
   @override
   Widget build(BuildContext context) {
-    return _AppBlocContainer(
+    return _AppStateContainer(
       appData: this,
-      blocProvider: widget.blocProvider,
       child: widget.child,
     );
   }
 }
 
-class _AppBlocContainer extends InheritedWidget {
-  final AppBlocState appData;
-  final BlocProvider blocProvider;
+// TODO chapter_8: implement inherited widget
+class _AppStateContainer extends InheritedWidget {
+  final AppState appData;
 
-  _AppBlocContainer({
+  _AppStateContainer({
     Key key,
     @required this.appData,
     @required Widget child,
-    @required this.blocProvider,
   }) : super(key: key, child: child);
 
   @override

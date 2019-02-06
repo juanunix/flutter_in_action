@@ -12,23 +12,10 @@ class CartBloc {
   final CartService _service;
 
   // Inputs
-  final _addProductController = new StreamController<AddToCartEvent>();
-  void addToCart(Product product, int qty) {
-    var productForCart = new Product((b) => b
-      ..id = product.id
-      ..title = product.title
-      ..imageTitle = product.imageTitle
-      ..category = product.category
-      ..cost = product.cost);
-
-    return _addProductController.sink
-        .add(new AddToCartEvent(productForCart, qty));
-  }
-
-  final _removeFromCartController = new StreamController<RemoveFromCartEvent>();
-  void removeFromCart(String productTitle, int qtyInCart) {
-    return _removeFromCartController.sink.add(new RemoveFromCartEvent(productTitle, qtyInCart));
-  }
+  StreamController<AddToCartEvent> addProductSink =
+      new StreamController<AddToCartEvent>();
+  StreamController<RemoveFromCartEvent> removeFromCartSink =
+      new StreamController<RemoveFromCartEvent>();
 
   // Outputs
   Stream<Map<String, int>> get cartItems => _cartItemStreamController.stream;
@@ -40,8 +27,11 @@ class CartBloc {
       new BehaviorSubject<int>(seedValue: 0);
 
   CartBloc(this._service) {
-    _addProductController.stream.listen((_handleNewCartItems));
-    _removeFromCartController.stream.listen((_handleRemoveCartItem));
+    // Listen to inputs
+    addProductSink.stream.listen((_handleAddItemsToCart));
+    removeFromCartSink.stream.listen((_handleRemoveCartItem));
+
+    // listen for incoming outputs
     _service
         .streamCartCount()
         .listen((int count) => _cartItemCountStreamController.add(count));
@@ -50,7 +40,7 @@ class CartBloc {
         .listen((Map<String, int> data) => _cartItemStreamController.add(data));
   }
 
-  void _handleNewCartItems(AddToCartEvent e) {
+  void _handleAddItemsToCart(AddToCartEvent e) {
     _service.addToCart(e.product, e.qty);
   }
 
@@ -59,8 +49,8 @@ class CartBloc {
   }
 
   close() {
-    _addProductController.close();
-    _removeFromCartController.close();
+    addProductSink.close();
+    removeFromCartSink.close();
     _cartItemStreamController.close();
     _cartItemCountStreamController.close();
   }

@@ -5,6 +5,7 @@
 
 import 'dart:async';
 
+import 'package:e_commerce_complete/page/add_product_form.dart';
 import 'package:shared_lib/e_commerce_app.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:shared_lib/shared_lib.dart';
@@ -55,11 +56,17 @@ class CatalogBloc {
   }
 
   _handleProductUpdate(ProductEvent event) {
-    _service.addNewProduct(event.product);
+    // serialize new product
+//    _service.addNewProduct(event);
   }
 
   _handleAddProduct(ProductEvent event) {
-    _service.updateProduct(event.product);
+    var product = new Product((b) => b
+      ..category = event.product.category
+      ..title = event.product.title
+      ..cost = event.product.cost
+      ..imageTitle = ImageTitle.SlicedOranges); // This is faked.
+    _service.addNewProduct(product);
   }
 
   void close() {
@@ -69,10 +76,15 @@ class CatalogBloc {
   }
 }
 
-class ProductEvent {
-  Product product;
+abstract class ProductEvent {
+  NewProduct product;
+  ProductEvent(this.product);
 }
 
-class AddProductEvent extends ProductEvent {}
+class AddProductEvent extends ProductEvent {
+  AddProductEvent(NewProduct product) : super(product);
+}
 
-class UpdateProductEvent extends ProductEvent {}
+class UpdateProductEvent extends ProductEvent {
+  UpdateProductEvent(NewProduct product) : super(product);
+}

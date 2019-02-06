@@ -14,19 +14,25 @@ import 'package:shared_lib/src/utils/generate_ecommerce_data.dart';
 class AppStore {
   Cart _cart;
   Catalog _catalog;
+  ECommerceUser _user;
 
   StreamController<Cart> cartNotifier = new StreamController<Cart>.broadcast();
   StreamController<Catalog> catalogNotifier =
       new StreamController<Catalog>.broadcast();
+  StreamController<ECommerceUser> userNotifier =
+      new StreamController<ECommerceUser>.broadcast();
 
   AppStore() {
     // initialize app fake data
     _cart = buildInitialCart();
     _catalog = populateCatalog();
+    _user = new ECommerceUser(
+        name: "Eric Windmill", contact: "eric@ericwindmill.com", userProducts: []);
     // emit initial events, notifying the UI
     Future.delayed(Duration(milliseconds: 500), () {
       catalogNotifier.add(_catalog);
       cartNotifier.add(_cart);
+      userNotifier.add(_user);
     });
   }
 
@@ -40,5 +46,11 @@ class AppStore {
   void set catalog(Catalog c) {
     _catalog = c;
     catalogNotifier.add(c);
+  }
+
+  ECommerceUser get user => _user;
+  void set user(ECommerceUser c) {
+    _user = c;
+    userNotifier.add(c);
   }
 }

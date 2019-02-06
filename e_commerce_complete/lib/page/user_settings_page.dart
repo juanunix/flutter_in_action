@@ -3,51 +3,88 @@
  * Use of this source code is governed by the MIT license that can be found in the LICENSE file.
  */
 
+import 'package:e_commerce_complete/blocs/app_state.dart';
+import 'package:e_commerce_complete/utils/styles.dart';
+import 'package:e_commerce_complete/widget/forms/user_profile_form.dart';
+import 'package:e_commerce_complete/widget/scrollables/sliver_header.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_lib/e_commerce_app.dart';
 
-class UserSettingsPage extends StatefulWidget {
-  final ImageProvider<AssetImage> profileImage;
-  UserSettingsPage({Key key, this.profileImage}) : super(key: key);
-
-  @override
-  UserSettingsPageState createState() {
-    return new UserSettingsPageState();
-  }
-}
-
-class UserSettingsPageState extends State<UserSettingsPage> {
+class UserSettingsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    Widget avatar = CircleAvatar(
-      backgroundImage: AssetImage("assets/images/apple-in-hand.jpg"),
-      radius: 60.0,
-    );
-
-    final GlobalKey _formKey = new GlobalKey<FormState>();
-
-    return Form(
-      key: _formKey,
-      child: Column(
-        children: <Widget>[
-          avatar,
-          TextFormField(
-            initialValue: "Eric Windmill",
-            validator: (value) {
-              if (value.isEmpty) {
-                return "Field cannot be left blank";
-              }
-            },
+    var _bloc = AppState.of(context).blocProvider.userBloc;
+    return Stack(
+      children: <Widget>[
+        CustomScrollView(
+          slivers: <Widget>[
+            CustomSliverHeader(
+              headerText: "Profile",
+            ),
+            SliverToBoxAdapter(
+              child: UserProfileForm(),
+            ),
+            CustomSliverHeader(
+              headerText: "My Products",
+            ),
+            StreamBuilder(
+              stream: _bloc.user,
+              initialData: ECommerceUser(userProducts: []),
+              builder: (BuildContext context,
+                  AsyncSnapshot<ECommerceUser> snapshot) {
+                return SliverList(
+                  delegate: SliverChildBuilderDelegate(
+                      (BuildContext context, int index) {
+                    var _product = snapshot.data.userProducts[index];
+                    return Container(
+                        decoration: BoxDecoration(
+                          border: Border(
+                            bottom:
+                                BorderSide(width: .5, color: Colors.black54),
+                          ),
+                        ),
+                        child: Dismissible(
+                          direction: DismissDirection.endToStart,
+                          background: Container(color: Colors.red[300]),
+                          key: Key(_product.toString()),
+                          child: Container(
+                            child: ListTile(
+                              title: Text(_product.title),
+                            ),
+                          ),
+                          onDismissed: (DismissDirection dir) {
+                            Scaffold.of(context).showSnackBar(
+                              SnackBar(
+                                backgroundColor: AppColors.primary,
+                                content: Text(
+                                  "${_product.title} deleted.",
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .headline
+                                      .copyWith(
+                                          color: AppColors.accentTextColor),
+                                ),
+                              ),
+                            );
+                          },
+                        ));
+                  }, childCount: snapshot.data.userProducts.length),
+                );
+              },
+            )
+          ],
+        ),
+        Positioned(
+          bottom: Spacing.matGridUnit(),
+          right: Spacing.matGridUnit(),
+          child: FloatingActionButton.extended(
+            icon: Icon(Icons.add),
+            label: Text("New Product"),
+            onPressed: () => Navigator.of(context)
+                .pushNamed(ECommerceRoutes.addProductFormPage),
           ),
-          TextFormField(
-            initialValue: "eric@ericwindmill.com",
-            validator: (value) {
-              if (!value.contains("@")) {
-                return "Please enter a valid email address.";
-              }
-            },
-          ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

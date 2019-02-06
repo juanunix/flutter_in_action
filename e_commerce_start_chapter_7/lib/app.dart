@@ -7,7 +7,6 @@ import 'package:e_commerce_start_chapter_7/page/base/page_base.dart';
 import 'package:e_commerce_start_chapter_7/page/base/page_container.dart';
 import 'package:e_commerce_start_chapter_7/utils/styles.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_lib/e_commerce_app.dart';
 
 class ECommerceApp extends StatelessWidget {
   @override
@@ -44,13 +43,14 @@ class ECommerceApp extends StatelessWidget {
       home: PageContainer(pageType: PageType.Catalog,),
       routes: {
         // TODO chapter_7: Setup named routes
-//        ECommerceRoutes.catalogPage: (context) =>
-//            PageContainer(pageType: PageType.Catalog),
-//        ECommerceRoutes.cartPage: (context) =>
-//            PageContainer(pageType: PageType.Cart),
-//        ECommerceRoutes.userSettingsPage: (context) =>
-//            PageContainer(pageType: PageType.Settings),
       },
+      navigatorObservers: [
+        routeObserver
+        // TODO chapter_7: Setup route observers
+      ],
     );
   }
 }
+
+// create a route observer
+final RouteObserver<Route> routeObserver = RouteObserver<Route>();

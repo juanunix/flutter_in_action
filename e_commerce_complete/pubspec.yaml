@@ -15,6 +15,7 @@ dependencies:
   flutter_firebase_repository:
     path: ../flutter_firebase_repository
   path_provider: ^0.4.1
+  image_picker: ^0.4.12+1
 
 dev_dependencies:
   flutter_test:

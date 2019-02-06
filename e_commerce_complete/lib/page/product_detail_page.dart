@@ -3,7 +3,7 @@
  * Use of this source code is governed by the MIT license that can be found in the LICENSE file.
  */
 
-import 'package:e_commerce_complete/blocs/app_bloc.dart';
+import 'package:e_commerce_complete/blocs/app_state.dart';
 import 'package:e_commerce_complete/blocs/cart_bloc.dart';
 import 'package:e_commerce_complete/utils/styles.dart';
 import 'package:flutter/material.dart';
@@ -25,13 +25,13 @@ class ProductDetailPageState extends State<ProductDetailPage> {
 
   @override
   Widget build(BuildContext context) {
-    var _cartBloc = AppBloc.of(context).blocProvider.cartBloc;
+    var _cartBloc = AppState.of(context).blocProvider.cartBloc;
 
     return Stack(
       children: <Widget>[
         Positioned(
           bottom: 100.0,
-          left: 30.0, // half of the "padding" we added in the containers width
+          left: 20.0, // half of the "padding" we added in the containers width
           child: Container(
             padding: EdgeInsets.all(Spacing.matGridUnit(scale: 3)),
             decoration: BoxDecoration(
@@ -43,7 +43,7 @@ class ProductDetailPageState extends State<ProductDetailPage> {
                       offset: Offset(1.0, 1.0),
                       blurRadius: 1.0),
                 ]),
-            width: MediaQuery.of(context).size.width - 60.0,
+            width: MediaQuery.of(context).size.width - 40.0,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -126,8 +126,8 @@ class ProductDetailPageState extends State<ProductDetailPage> {
                     RaisedButton(
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(25.0)),
-                      onPressed: () =>
-                          _cartBloc.addToCart(widget.product, _quantity),
+                      onPressed: () => _cartBloc.addProductSink
+                          .add(AddToCartEvent(widget.product, _quantity)),
                       textColor: Colors.white,
                       child: Text("Add to Cart"),
                     ),

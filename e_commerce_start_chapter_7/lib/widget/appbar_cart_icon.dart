@@ -27,9 +27,8 @@ class AppBarCartIcon extends StatelessWidget {
             color: AppColors.textColor,
             // buttons are disabled if `onPressed` is null
             onPressed: () {
-              print("This page must be setup!");
+              print("This navigation must be setup!");
               // TODO chapter_7: more push named
-              // return Navigator.of(context).pushNamed(ECommerceRoutes.cartPage),
           },
 
           ),

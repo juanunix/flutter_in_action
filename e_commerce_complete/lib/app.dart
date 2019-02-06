@@ -8,7 +8,10 @@ import 'package:e_commerce_complete/page/base/page_container.dart';
 import 'package:e_commerce_complete/utils/material_route_transition.dart';
 import 'package:e_commerce_complete/utils/styles.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:shared_lib/e_commerce_app.dart';
+
+final RouteObserver<Route> routeObserver = RouteObserver<Route>();
 
 class ECommerceApp extends StatefulWidget {
   @override
@@ -18,6 +21,8 @@ class ECommerceApp extends StatefulWidget {
 class _ECommerceAppState extends State<ECommerceApp> {
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
+
     /// All constants can be found in [utils/styles.dart]
     var _theme = ThemeData(
       // content
@@ -41,7 +46,7 @@ class _ECommerceAppState extends State<ECommerceApp> {
       primaryIconTheme: Theme.of(context)
           .iconTheme
           .copyWith(color: AppColors.displayTextColor),
-      buttonColor: AppColors.primary[500],
+      buttonColor: Colors.black54,
     );
 
     return MaterialApp(
@@ -54,7 +59,10 @@ class _ECommerceAppState extends State<ECommerceApp> {
             PageContainer(pageType: PageType.Cart),
         ECommerceRoutes.userSettingsPage: (context) =>
             PageContainer(pageType: PageType.Settings),
+        ECommerceRoutes.addProductFormPage: (context) =>
+            PageContainer(pageType: PageType.AddProductForm),
       },
+      navigatorObservers: [routeObserver],
     );
   }
 }

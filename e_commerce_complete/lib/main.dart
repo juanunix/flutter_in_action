@@ -5,9 +5,10 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:e_commerce_complete/app.dart';
-import 'package:e_commerce_complete/blocs/app_bloc.dart';
+import 'package:e_commerce_complete/blocs/app_state.dart';
 import 'package:e_commerce_complete/blocs/cart_bloc.dart';
 import 'package:e_commerce_complete/blocs/catalog_bloc.dart';
+import 'package:e_commerce_complete/blocs/user_bloc.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
@@ -42,6 +43,7 @@ Future<void> main() async {
   var store = new AppStore();
   var catalogService = new CatalogServiceTemporary(store);
   var cartService = new CartServiceTemporary(store);
+  var userService = new MockUserService(store);
 
   /// --------- UNCOMMENT ENDING HERE TO USE FIREBASE
   /// --------- END LOCAL DEV REGION
@@ -50,6 +52,7 @@ Future<void> main() async {
   var blocProvider = new BlocProvider(
     cartBloc: new CartBloc(cartService),
     catalogBloc: new CatalogBloc(catalogService),
+    userBloc: new UserBloc(userService),
   );
 
   /// Wrap the app in the AppBloc
@@ -61,7 +64,7 @@ Future<void> main() async {
   /// Then throughout the App you can access your Firestore Database by calling
   /// var _service = AppBloc.of(context).provider.catalogService
   runApp(
-    AppBloc(
+    AppState(
       blocProvider: blocProvider,
       child: ECommerceApp(),
     ),

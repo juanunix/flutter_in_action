@@ -16,6 +16,7 @@ abstract class Product implements Built<Product, ProductBuilder> {
   @nullable
   double get cost;
 
+
   Product._();
 
   factory Product([updates(ProductBuilder b)]) = _$Product;

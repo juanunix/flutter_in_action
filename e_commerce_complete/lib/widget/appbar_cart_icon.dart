@@ -3,7 +3,7 @@
  * Use of this source code is governed by the MIT license that can be found in the LICENSE file.
  */
 
-import 'package:e_commerce_complete/blocs/app_bloc.dart';
+import 'package:e_commerce_complete/blocs/app_state.dart';
 import 'package:e_commerce_complete/blocs/cart_bloc.dart';
 import 'package:e_commerce_complete/utils/styles.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +12,7 @@ import 'package:shared_lib/e_commerce_app.dart';
 class AppBarCartIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    var _bloc = AppBloc.of(context).blocProvider.cartBloc;
+    var _bloc = AppState.of(context).blocProvider.cartBloc;
 
     return Padding(
       padding: const EdgeInsets.all(8.0),

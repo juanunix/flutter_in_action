@@ -4,6 +4,7 @@
  */
 
 import 'package:e_commerce_complete/menu/app_menu_drawer.dart';
+import 'package:e_commerce_complete/page/add_product_form.dart';
 import 'package:e_commerce_complete/page/base/page_background_image.dart';
 import 'package:e_commerce_complete/page/base/page_base.dart';
 import 'package:e_commerce_complete/page/cart_page.dart';
@@ -22,7 +23,20 @@ class PageContainer extends PageContainerBase {
   Widget get menuDrawer => AppMenu();
 
   @override
-  String get pageTitle => pageType.toString().split(".")[1];
+  String get pageTitle {
+    switch (pageType) {
+      case PageType.Cart:
+        return "My Cart";
+      case PageType.Settings:
+        return "My Settings";
+        break;
+      case PageType.AddProductForm:
+        return "Add Product";
+      case PageType.Catalog:
+      default:
+        return "The Farmers Market";
+    }
+  }
 
   @override
   Widget get body {
@@ -33,6 +47,9 @@ class PageContainer extends PageContainerBase {
         break;
       case PageType.Settings:
         page = UserSettingsPage();
+        break;
+      case PageType.AddProductForm:
+        page = AddProductForm();
         break;
       case PageType.Catalog:
       default:

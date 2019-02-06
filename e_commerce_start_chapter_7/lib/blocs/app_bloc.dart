@@ -3,7 +3,6 @@
  * Use of this source code is governed by the MIT license that can be found in the LICENSE file.
  */
 
-
 import 'package:e_commerce_start_chapter_7/blocs/cart_bloc.dart';
 import 'package:e_commerce_start_chapter_7/blocs/catalog_bloc.dart';
 import 'package:flutter/material.dart';
@@ -31,13 +30,6 @@ class AppBloc extends StatefulWidget {
 }
 
 class AppBlocState extends State<AppBloc> {
-  String _activeRoute = '/'; // Initially, "home" is selected
-  String get activeRoute => _activeRoute;
-  set activeRoute(String route) {
-    if (_activeRoute == route) return;
-    _activeRoute = route;
-  }
-
   BlocProvider get blocProvider => widget.blocProvider;
 
   void dispose() {

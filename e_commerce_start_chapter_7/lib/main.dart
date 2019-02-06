@@ -30,7 +30,7 @@ Future<void> main() async {
 //  final FirebaseApp app = await FirebaseApp.configure(
 //      name: 'e_commerce',
 //      options: const FirebaseOptions(
-//        googleAppID: '1:345740250303:ios:2eaba02db917f95a', //TODO: Replace
+//        googleAppID: '1:345740250303:ios:2eaba02db917f95a', //TODO eric: Replace
 //        apiKey: 'AIzaSyDpY7dOXdtOM2O-tEa2fkubqqg8sh_aVjA',
 //        projectID: 'flutter-in-action-3fa96',
 //      ));

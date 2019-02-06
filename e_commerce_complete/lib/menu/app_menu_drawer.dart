@@ -5,48 +5,38 @@
 
 import 'dart:async';
 
-import 'package:e_commerce_complete/blocs/app_bloc.dart';
+import 'package:e_commerce_complete/app.dart';
+import 'package:e_commerce_complete/blocs/app_state.dart';
 import 'package:e_commerce_complete/utils/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_lib/e_commerce_app.dart';
 
-class AppMenu extends StatelessWidget {
-  Future _navigate(BuildContext context, String route) async {
-    AppBloc.of(context).activeRoute = route;
-    await Navigator.pushNamed(context, route);
+class AppMenu extends StatefulWidget {
+  @override
+  AppMenuState createState() => AppMenuState();
+}
+
+class AppMenuState extends State<AppMenu> with RouteAware {
+  String _activeRoute;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    routeObserver.subscribe(this, ModalRoute.of(context));
   }
 
-  Widget _buildTile(
-      {@required String title,
-      @required IconData icon,
-      @required bool isActive,
-      GestureTapCallback onTap}) {
-    var iconWidget =
-        isActive ? Icon(icon, color: AppColors.primary[700]) : Icon(icon);
-    var titleWidget = isActive
-        ? Text(title, style: TextStyle(color: AppColors.primary[700]))
-        : Text(title);
+  @override
+  void didPush() {
+    _activeRoute = ModalRoute.of(context).settings.name;
+  }
 
-    var tile = ListTile(
-      leading: iconWidget,
-      title: titleWidget,
-      onTap: onTap,
-    );
-
-    return isActive
-        ? Container(
-            decoration: BoxDecoration(
-                color: AppColors.accent,
-                borderRadius: BorderRadius.circular(10.0)),
-            child: tile,
-            margin: EdgeInsets.all(Spacing.matGridUnit()),
-          )
-        : Container(child: tile);
+  Future _navigate(String route) async {
+    await Navigator.popAndPushNamed(context, route);
   }
 
   @override
   Widget build(BuildContext context) {
-    var activeRoute = AppBloc.of(context).activeRoute;
+    _activeRoute ??= "/";
 
     return Drawer(
       child: ListView(
@@ -62,22 +52,29 @@ class AppMenu extends StatelessWidget {
                   context, ECommerceRoutes.userSettingsPage);
             },
           ),
-          _buildTile(
-              title: "Catalog",
-              icon: Icons.apps,
-              isActive: activeRoute == ECommerceRoutes.catalogPage,
-              onTap: () => _navigate(context, ECommerceRoutes.catalogPage)),
-          _buildTile(
-            title: "Shopping Cart",
-            icon: Icons.shopping_cart,
-            isActive: activeRoute == ECommerceRoutes.cartPage,
-            onTap: () => _navigate(context, ECommerceRoutes.cartPage),
+          ListTile(
+            leading: Icon(Icons.apps),
+            title: Text("Catalog"),
+            selected: _activeRoute == ECommerceRoutes.catalogPage,
+            onTap: () => _navigate(ECommerceRoutes.catalogPage),
           ),
-          _buildTile(
-            icon: Icons.person,
-            title: "User Settings",
-            isActive: activeRoute == ECommerceRoutes.userSettingsPage,
-            onTap: () => _navigate(context, ECommerceRoutes.userSettingsPage),
+          ListTile(
+            leading: Icon(Icons.shopping_cart),
+            title: Text("Cart"),
+            selected: _activeRoute == ECommerceRoutes.cartPage,
+            onTap: () => _navigate(ECommerceRoutes.cartPage),
+          ),
+          ListTile(
+            leading: Icon(Icons.settings),
+            title: Text("My Products"),
+            selected: _activeRoute == ECommerceRoutes.addProductFormPage,
+            onTap: () => _navigate(ECommerceRoutes.addProductFormPage),
+          ),
+          ListTile(
+            leading: Icon(Icons.person),
+            title: Text("User Settings"),
+            selected: _activeRoute == ECommerceRoutes.userSettingsPage,
+            onTap: () => _navigate(ECommerceRoutes.userSettingsPage),
           ),
           AboutListTile(
             icon: Icon(Icons.info),

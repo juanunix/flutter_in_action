@@ -3,16 +3,17 @@
  * Use of this source code is governed by the MIT license that can be found in the LICENSE file.
  */
 
-import 'package:e_commerce_complete/blocs/app_bloc.dart';
+import 'package:e_commerce_complete/blocs/app_state.dart';
 import 'package:e_commerce_complete/blocs/cart_bloc.dart';
 import 'package:e_commerce_complete/utils/styles.dart';
 import 'package:e_commerce_complete/widget/catalog.dart';
+import 'package:e_commerce_complete/widget/scrollables/sliver_header.dart';
 import 'package:flutter/material.dart';
 
 class CartPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    var _bloc = AppBloc.of(context).blocProvider.cartBloc;
+    var _bloc = AppState.of(context).blocProvider.cartBloc;
     return CustomScrollView(
       slivers: <Widget>[
         CustomSliverHeader(
@@ -49,7 +50,7 @@ class CartPage extends StatelessWidget {
                         ),
                       ),
                       onDismissed: (DismissDirection dir) {
-                        _bloc.removeFromCart(_product, qty);
+                        _bloc.removeFromCartSink.add(RemoveFromCartEvent(_product, qty));
                         Scaffold.of(context).showSnackBar(
                           SnackBar(
                             backgroundColor: AppColors.primary,
