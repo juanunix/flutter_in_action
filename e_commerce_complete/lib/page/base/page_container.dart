@@ -48,9 +48,6 @@ class PageContainer extends PageContainerBase {
       case PageType.Settings:
         page = UserSettingsPage();
         break;
-      case PageType.AddProductForm:
-        page = AddProductForm();
-        break;
       case PageType.Catalog:
       default:
         page = CatalogPage();
@@ -90,6 +87,23 @@ class ProductDetailPageContainer extends PageContainerBase {
 
   ImageTitle get _getImageForCategory =>
       categoriesToImageMap[product.category.name];
+
+  @override
+  Color get backgroundColor => Colors.transparent;
+}
+
+class AddNewProductPageContainer extends PageContainerBase {
+  @override
+  Widget get body => AddProductForm();
+
+  @override
+  String get pageTitle => "Add Product";
+
+  @override
+  Widget get menuDrawer => null;
+
+  @override
+  Widget get background => Container();
 
   @override
   Color get backgroundColor => Colors.transparent;

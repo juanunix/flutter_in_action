@@ -4,6 +4,9 @@
  */
 
 import 'package:e_commerce_complete/blocs/app_state.dart';
+import 'package:e_commerce_complete/page/base/page_base.dart';
+import 'package:e_commerce_complete/page/base/page_container.dart';
+import 'package:e_commerce_complete/utils/material_route_transition.dart';
 import 'package:e_commerce_complete/utils/styles.dart';
 import 'package:e_commerce_complete/widget/forms/user_profile_form.dart';
 import 'package:e_commerce_complete/widget/scrollables/sliver_header.dart';
@@ -78,11 +81,16 @@ class UserSettingsPage extends StatelessWidget {
           bottom: Spacing.matGridUnit(),
           right: Spacing.matGridUnit(),
           child: FloatingActionButton.extended(
-            icon: Icon(Icons.add),
-            label: Text("New Product"),
-            onPressed: () => Navigator.of(context)
-                .pushNamed(ECommerceRoutes.addProductFormPage),
-          ),
+              icon: Icon(Icons.add),
+              label: Text("New Product"),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  FadeInSlideOutRoute(
+                    builder: (context) => AddNewProductPageContainer(),
+                  ),
+                );
+              }),
         ),
       ],
     );

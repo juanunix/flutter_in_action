@@ -75,16 +75,3 @@ class CatalogBloc {
     _controllersByCategory.forEach((controller) => controller.close());
   }
 }
-
-abstract class ProductEvent {
-  NewProduct product;
-  ProductEvent(this.product);
-}
-
-class AddProductEvent extends ProductEvent {
-  AddProductEvent(NewProduct product) : super(product);
-}
-
-class UpdateProductEvent extends ProductEvent {
-  UpdateProductEvent(NewProduct product) : super(product);
-}

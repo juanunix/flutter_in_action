@@ -5,13 +5,33 @@
 
 import 'package:shared_lib/e_commerce_app.dart';
 
-class NewProduct {
-  double cost;
-  String title;
-  ProductCategory category;
+class NewUserProductEvent {
+  final NewProduct product;
 
-  @override
-  String toString() {
-    return 'NewProduct{cost: $cost, title: $title, category: $category}';
-  }
+  NewUserProductEvent(this.product);
+}
+
+class UpdateUserEvent {
+  ECommerceUser user;
+
+  UpdateUserEvent(this.user);
+}
+
+abstract class ProductEvent {
+  NewProduct product;
+  ProductEvent(this.product);
+}
+
+class AddProductEvent extends ProductEvent {
+  AddProductEvent(NewProduct product) : super(product);
+}
+
+class UpdateProductEvent extends ProductEvent {
+  UpdateProductEvent(NewProduct product) : super(product);
+}
+
+class RouteChangeEvent {
+  final String route;
+
+  RouteChangeEvent(this.route);
 }

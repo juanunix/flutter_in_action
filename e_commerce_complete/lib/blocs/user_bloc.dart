@@ -5,7 +5,6 @@
 
 import 'dart:async';
 
-import 'package:e_commerce_complete/page/add_product_form.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:shared_lib/e_commerce_app.dart';
 
@@ -13,7 +12,7 @@ class UserBloc {
   final UserService _service;
 
   //Inputs
-  StreamController updateUserInformationSink =
+  StreamController<UpdateUserEvent> updateUserInformationSink =
       new StreamController<UpdateUserEvent>();
   StreamController<NewUserProductEvent> addNewProductToUserProductsSink =
       new StreamController<NewUserProductEvent>();
@@ -32,7 +31,10 @@ class UserBloc {
     });
   }
 
-  _handleNewUserInformation(dynamic data) {}
+  void _handleNewUserInformation(UpdateUserEvent event) {
+    event.user.userProducts = [];
+    _service.updateUserInformation(event.user);
+  }
 
   _handleNewUserProduct(NewUserProductEvent event) {
     var product = new Product((b) => b
@@ -48,14 +50,4 @@ class UserBloc {
     addNewProductToUserProductsSink.close();
     _userStreamController.close();
   }
-}
-
-class NewUserProductEvent {
-  final NewProduct product;
-
-  NewUserProductEvent(this.product);
-}
-
-class UpdateUserEvent {
-  ECommerceUser user;
 }

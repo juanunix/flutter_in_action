@@ -7,6 +7,7 @@ import 'dart:async';
 
 import 'package:e_commerce_complete/app.dart';
 import 'package:e_commerce_complete/blocs/app_state.dart';
+import 'package:e_commerce_complete/blocs/user_bloc.dart';
 import 'package:e_commerce_complete/utils/styles.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_lib/e_commerce_app.dart';
@@ -18,11 +19,13 @@ class AppMenu extends StatefulWidget {
 
 class AppMenuState extends State<AppMenu> with RouteAware {
   String _activeRoute;
+  UserBloc _bloc;
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
     routeObserver.subscribe(this, ModalRoute.of(context));
+    _bloc = AppState.of(context).blocProvider.userBloc;
   }
 
   @override
@@ -41,16 +44,22 @@ class AppMenuState extends State<AppMenu> with RouteAware {
     return Drawer(
       child: ListView(
         children: <Widget>[
-          UserAccountsDrawerHeader(
-            currentAccountPicture: CircleAvatar(
-              backgroundImage: AssetImage("assets/images/apple-in-hand.jpg"),
-            ),
-            accountEmail: Text("eric@ericwindmill.com"),
-            accountName: Text("Eric Windmill"),
-            onDetailsPressed: () {
-              Navigator.pushReplacementNamed(
-                  context, ECommerceRoutes.userSettingsPage);
-            },
+          StreamBuilder(
+            initialData: ECommerceUser(name: "", contact: ""),
+            stream: _bloc.user,
+            builder: (BuildContext context, AsyncSnapshot<ECommerceUser> s) =>
+                UserAccountsDrawerHeader(
+                  currentAccountPicture: CircleAvatar(
+                    backgroundImage:
+                        AssetImage("assets/images/apple-in-hand.jpg"),
+                  ),
+                  accountEmail: Text(s.data.contact),
+                  accountName: Text(s.data.name),
+                  onDetailsPressed: () {
+                    Navigator.pushReplacementNamed(
+                        context, ECommerceRoutes.userSettingsPage);
+                  },
+                ),
           ),
           ListTile(
             leading: Icon(Icons.apps),
@@ -63,12 +72,6 @@ class AppMenuState extends State<AppMenu> with RouteAware {
             title: Text("Cart"),
             selected: _activeRoute == ECommerceRoutes.cartPage,
             onTap: () => _navigate(ECommerceRoutes.cartPage),
-          ),
-          ListTile(
-            leading: Icon(Icons.settings),
-            title: Text("My Products"),
-            selected: _activeRoute == ECommerceRoutes.addProductFormPage,
-            onTap: () => _navigate(ECommerceRoutes.addProductFormPage),
           ),
           ListTile(
             leading: Icon(Icons.person),

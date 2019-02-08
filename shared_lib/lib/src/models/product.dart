@@ -80,3 +80,16 @@ class ProductCategory extends EnumClass {
   static BuiltSet<ProductCategory> get values => _$productCategoryValues;
   static ProductCategory valueOf(String name) => _$valueOfProductCategory(name);
 }
+
+// Convenience class that bridges user input with adding products to the database.
+class NewProduct {
+  double cost;
+  String title;
+  ProductCategory category;
+  DateTime dateAdded;
+
+  @override
+  String toString() {
+    return 'NewProduct{cost: $cost, title: $title, category: $category}';
+  }
+}

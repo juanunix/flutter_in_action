@@ -61,12 +61,6 @@ class _AppStoreContainer extends InheritedWidget {
       oldWidget.appData != this.appData;
 }
 
-class RouteChangeEvent {
-  final String route;
-
-  RouteChangeEvent(this.route);
-}
-
 class ServiceProvider {
   final CatalogService catalogService;
   final CartService cartService;
